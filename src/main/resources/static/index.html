@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Docx Editor</title>
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href ="index.css"/>
 </head>
 <body>
+<div id="toolbar">
+    <button id="paragraph">P</button>
 
-<div id="editorjs"></div>
-<button id="download">DOCX 다운로드</button>
+    <button id="h1">H1</button>
+    <button id="h2">H2</button>
+    <button id="h3">H3</button>
 
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.30.8"></script>
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@2.8.9"></script>
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@1.2.1"></script>
-<script src="index.js"></script>
+    <button id="bold">강조</button>
+    <button id="underline">밑줄</button>
+
+    <button id="align-left">왼쪽</button>
+    <button id="align-center">가운데</button>
+    <button id="align-right">오른쪽</button>
+</div>
+
+<div id="editor"></div>
+<button id="download">다운로드</button>
+<script type = "module" src="index.js"></script>
 </body>
 </html>

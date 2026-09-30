@@ -1,159 +1,57 @@
-class Heading1 {
-    static get toolbox() {
-        return {
-            title: "Heading 1",
-            icon: "H1"
-        };
-    }
+import { Editor } from "https://esm.sh/@tiptap/core";
+import StarterKit from "https://esm.sh/@tiptap/starter-kit";
+import Underline from "https://esm.sh/@tiptap/extension-underline";
+import TextAlign from "https://esm.sh/@tiptap/extension-text-align";
+import Placeholder from "https://esm.sh/@tiptap/extension-placeholder";
+const editor = new Editor({
+    element: document.getElementById("editor"),
 
-    constructor({ data }) {
-        this.data = data;
-    }
-
-    render() {
-        const element = document.createElement("h1");
-
-        element.contentEditable = true;
-        element.className = "custom-heading";
-        element.innerHTML = this.data.text || "";
-
-        return element;
-    }
-
-    save(blockContent) {
-        return {
-            text: blockContent.innerHTML,
-            level: 1
-        };
-    }
-}
-
-
-class Heading2 {
-    static get toolbox() {
-        return {
-            title: "Heading 2",
-            icon: "H2"
-        };
-    }
-
-    constructor({ data }) {
-        this.data = data;
-    }
-
-    render() {
-        const element = document.createElement("h2");
-
-        element.contentEditable = true;
-        element.className = "custom-heading";
-        element.innerHTML = this.data.text || "";
-
-        return element;
-    }
-
-    save(blockContent) {
-        return {
-            text: blockContent.innerHTML,
-            level: 2
-        };
-    }
-}
-
-
-class Heading3 {
-    static get toolbox() {
-        return {
-            title: "Heading 3",
-            icon: "H3"
-        };
-    }
-
-    constructor({ data }) {
-        this.data = data;
-    }
-
-    render() {
-        const element = document.createElement("h3");
-
-        element.contentEditable = true;
-        element.className = "custom-heading";
-        element.innerHTML = this.data.text || "";
-
-        return element;
-    }
-
-    save(blockContent) {
-        return {
-            text: blockContent.innerHTML,
-            level: 3
-        };
-    }
-}
-
-
-const editor = new EditorJS({
-    holder: "editorjs",
-
-    tools: {
-        heading1: Heading1,
-        heading2: Heading2,
-        heading3: Heading3
-    },
-
-    inlineToolbar: true,
-
-    placeholder: "내용을 입력하세요..."
+    extensions: [
+        StarterKit,
+        Underline,
+        TextAlign.configure({
+            types: ['heading', 'paragraph']
+        }),
+        Placeholder.configure({
+            placeholder: "내용을 입력하세요..."
+        })
+    ],
 });
 
+document.getElementById("align-left").addEventListener("click", () => {
+    editor.chain().focus().setTextAlign("left").run();
+});
+document.getElementById("align-center").addEventListener("click", () => {
+    editor.chain().focus().setTextAlign("center").run();
+});
+document.getElementById("align-right").addEventListener("click", () => {
+    editor.chain().focus().setTextAlign("right").run();
+});
 
-document
-    .getElementById("download")
-    .addEventListener("click", async () => {
-
-        try {
-            const data = await editor.save();
-
-            console.log(data);
-
-            const response = await fetch(
-                "/api/docx",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify(data)
-                }
-            );
-
-            if (!response.ok) {
-                console.error(
-                    "DOCX 생성 실패: ",
-                    response.status
-                );
-                return;
-            }
-
-            const blob = await response.blob();
-
-            const url = URL.createObjectURL(blob);
-
-            const a = document.createElement("a");
-
-            a.href = url;
-            a.download = "report.docx";
-
-            document.body.appendChild(a);
-
-            a.click();
-
-            a.remove();
-
-            URL.revokeObjectURL(url);
-
-        } catch (error) {
-            console.error("예외 발생:", error);
-        }
+document.getElementById("download").addEventListener("click", async () => {
+    const content = editor.getJSON();
+    const response = await fetch("http://localhost:8080/api/docx", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: content.content
+        })
     });
+
+    if (!response.ok) {
+        throw new Error("서버 응답 없음");
+    }
+
+    const result = await response.blob();
+    const url = URL.createObjectURL(result);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "download.docx";
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(url);
+});

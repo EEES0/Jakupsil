@@ -1,7 +1,9 @@
 package io.github.EEES0.docxeditor.service;
 
 import io.github.EEES0.docxeditor.dto.CreateDocxRequest;
-import io.github.EEES0.docxeditor.dto.EditorBlock;
+import io.github.EEES0.docxeditor.dto.ContentNode;
+import io.github.EEES0.docxeditor.dto.TextNode;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -20,41 +22,31 @@ public class CreateDocx {
 
         XWPFDocument document = new XWPFDocument();
 
-        for (EditorBlock block : request.blocks()) {
+        for (ContentNode content : request.content()) {
 
             XWPFParagraph paragraph =
                     document.createParagraph();
+            if (content.attrs() != null && content.attrs().textAlign() != null) {
 
-            XWPFRun run =
-                    paragraph.createRun();
+                switch (content.attrs().textAlign()) {
+                    case "left" -> paragraph.setAlignment(ParagraphAlignment.LEFT);
 
-            run.setText(block.data().text());
+                    case "center" -> paragraph.setAlignment(ParagraphAlignment.CENTER);
 
-            switch (block.type()) {
+                    case "right" -> paragraph.setAlignment(ParagraphAlignment.RIGHT);
 
-                case "heading1" -> {
-                    run.setBold(true);
-                    run.setFontSize(28);
                 }
-
-                case "heading2" -> {
-                    run.setBold(true);
-                    run.setFontSize(22);
-                }
-
-                case "heading3" -> {
-                    run.setBold(true);
-                    run.setFontSize(18);
-                }
-
-                case "paragraph" -> {
-                    run.setFontSize(12);
+            }
+            if (content.content() != null) {
+                for (TextNode textContent : content.content()) {
+                    XWPFRun run = paragraph.createRun();
+                    run.setText(textContent.text());
                 }
             }
         }
 
         ByteArrayOutputStream out =
-                new ByteArrayOutputStream();
+        new ByteArrayOutputStream();
 
         document.write(out);
 
@@ -62,4 +54,5 @@ public class CreateDocx {
 
         return out.toByteArray();
     }
+
 }
