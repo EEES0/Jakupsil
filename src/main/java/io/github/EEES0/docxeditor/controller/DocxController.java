@@ -10,7 +10,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:63342")
 public class DocxController {
     private final CreateDocx createDocx;
 

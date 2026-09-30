@@ -62,7 +62,7 @@ whiteInput.addEventListener("click", () => {
 
 document.getElementById("download").addEventListener("click", async () => {
     const content = editor.getJSON();
-    const response = await fetch("http://localhost:8080/api/docx", {
+    const response = await fetch("/api/docx", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
