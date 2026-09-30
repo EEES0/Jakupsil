@@ -7,11 +7,14 @@
 </head>
 <body>
 <div id="toolbar">
+
+    <input type="text" id="doc-title" placeholder="제목을 입력하세요..."/>
+    <p>|</p>
     <select id="font-size">
         <option value="11px">8</option>
         <option value="12px">9</option>
         <option value="13px">10</option>
-        <option value="14px" selected>11 (word 기본값)</option>
+        <option value="14px" selected>11 (기본값)</option>
         <option value="16px">12</option>
         <option value="18px">14</option>
         <option value="21px">16</option>
@@ -25,14 +28,21 @@
         <option value="64px">48</option>
         <option value="90px">72</option>
     </select>
+    <p>|</p>
 
     <button id="bold">강조</button>
     <button id="underline">밑줄</button>
     <button id="italic">기울이기</button>
 
+    <p>|</p>
+
     <button id="align-left">왼쪽</button>
     <button id="align-center">가운데</button>
     <button id="align-right">오른쪽</button>
+    <p>|</p>
+    <button id="dark-mode">다크</button>
+    <p>|</p>
+    <button id="white-mode">화이트</button>
 </div>
 
 <div id="editor"></div>

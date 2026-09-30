@@ -1,15 +1,13 @@
-import { Editor } from "https://esm.sh/@tiptap/core";
-import StarterKit from "https://esm.sh/@tiptap/starter-kit";
-import Underline from "https://esm.sh/@tiptap/extension-underline";
-import TextAlign from "https://esm.sh/@tiptap/extension-text-align";
-import Placeholder from "https://esm.sh/@tiptap/extension-placeholder";
-import { TextStyle, FontSize } from "https://esm.sh/@tiptap/extension-text-style";
+import { Editor } from "https://esm.sh/@tiptap/core@3.31.3";
+import StarterKit from "https://esm.sh/@tiptap/starter-kit@3.31.3";
+import TextAlign from "https://esm.sh/@tiptap/extension-text-align@3.31.3";
+import Placeholder from "https://esm.sh/@tiptap/extension-placeholder@3.31.3";
+import { TextStyle, FontSize } from "https://esm.sh/@tiptap/extension-text-style@3.31.3";
 const editor = new Editor({
     element: document.getElementById("editor"),
 
     extensions: [
         StarterKit,
-        Underline,
         TextAlign.configure({
             types: ['heading', 'paragraph']
         }),
@@ -41,12 +39,26 @@ document.getElementById("underline").addEventListener("click", () => {
 document.getElementById("italic").addEventListener("click", () => {
     editor.chain().focus().toggleItalic().run();
 });
+let title = "제목";
+const titleInput = document.getElementById("doc-title");
+titleInput.addEventListener("input", () => {
+    title = titleInput.value;
+})
 
 const fontSizeSelect = document.getElementById("font-size");
 fontSizeSelect.addEventListener("change", () => {
     const size = fontSizeSelect.value;
     editor.chain().focus().setFontSize(size).run();
 });
+
+const darkInput = document.getElementById("dark-mode");
+const whiteInput = document.getElementById("white-mode");
+darkInput.addEventListener("click", () => {
+    document.body.classList.add("dark");
+})
+whiteInput.addEventListener("click", () => {
+    document.body.classList.remove("dark");
+})
 
 document.getElementById("download").addEventListener("click", async () => {
     const content = editor.getJSON();
@@ -70,7 +82,7 @@ document.getElementById("download").addEventListener("click", async () => {
     const a = document.createElement("a");
 
     a.href = url;
-    a.download = "download.docx";
+    a.download = title + ".docx";
     a.click();
     a.remove();
 
