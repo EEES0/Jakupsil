@@ -23,10 +23,7 @@ public class DocxController {
         byte[] file = createDocx.createDocxByte(request);
 
         return ResponseEntity.ok()
-                .header(
-                        "Content-Disposition",
-                        "attachment; filename=report.docx"
-                )
+                .header("Content-Disposition","attachment")
                 .header(
                         "Content-Type",
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"

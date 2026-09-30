@@ -2,9 +2,8 @@ package io.github.EEES0.docxeditor.dto;
 
 import java.util.List;
 
-public record TextNode(
+public record Mark(
         String type,
-        String text,
-        List<Mark> marks
+        MarkAttrs attrs
 ) {
 }

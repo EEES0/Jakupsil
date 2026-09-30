@@ -1,12 +1,7 @@
 package io.github.EEES0.docxeditor.service;
 
-import io.github.EEES0.docxeditor.dto.CreateDocxRequest;
-import io.github.EEES0.docxeditor.dto.ContentNode;
-import io.github.EEES0.docxeditor.dto.TextNode;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
+import io.github.EEES0.docxeditor.dto.*;
+import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -37,9 +32,25 @@ public class CreateDocx {
 
                 }
             }
+
             if (content.content() != null) {
                 for (TextNode textContent : content.content()) {
                     XWPFRun run = paragraph.createRun();
+                    if (textContent.marks() != null) {
+                        for (Mark mark : textContent.marks()) {
+                            switch (mark.type()) {
+                                case "bold" -> run.setBold(true);
+                                case "underline" -> run.setUnderline(UnderlinePatterns.SINGLE);
+                                case "italic" -> run.setItalic(true);
+                            }
+                            if (mark.attrs() != null && mark.attrs().fontSize() != null) {
+                                int size = Integer.parseInt(
+                                        mark.attrs().fontSize()
+                                                .substring(0, mark.attrs().fontSize().length() - 2));
+                                run.setFontSize((int) Math.round(size * 0.75)); //px -> pt 변환 위해 0.75 곱하고 반올림
+                            }
+                        }
+                    }
                     run.setText(textContent.text());
                 }
             }
