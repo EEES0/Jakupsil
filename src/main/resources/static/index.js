@@ -60,9 +60,9 @@ whiteInput.addEventListener("click", () => {
     document.body.classList.remove("dark");
 })
 
-document.getElementById("download").addEventListener("click", async () => {
+document.getElementById("docx-download").addEventListener("click", async () => {
     const content = editor.getJSON();
-    const response = await fetch("/api/docx", {
+    const response = await fetch("http://localhost:8080/api/docx", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -83,6 +83,34 @@ document.getElementById("download").addEventListener("click", async () => {
 
     a.href = url;
     a.download = title + ".docx";
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(url);
+});
+document.getElementById("hwp-download").addEventListener("click", async () => {
+    const content = editor.getJSON();
+    const response = await fetch("http://localhost:8080/api/hwp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: content.content
+        })
+    });
+    console.log(content.content)
+
+    if (!response.ok) {
+        throw new Error("서버 응답 없음");
+    }
+
+    const result = await response.blob();
+    const url = URL.createObjectURL(result);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = title + ".hwp";
     a.click();
     a.remove();
 

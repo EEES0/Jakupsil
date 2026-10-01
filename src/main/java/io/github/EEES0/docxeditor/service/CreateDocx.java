@@ -13,7 +13,7 @@ public class CreateDocx {
     /**
      * docx문서 생성하고 바이트 배열로 반환함
      */
-    public byte[] createDocxByte(CreateDocxRequest request) throws IOException {
+    public byte[] createDocxByte(CreateFileRequest request) throws IOException {
 
         XWPFDocument document = new XWPFDocument();
 
