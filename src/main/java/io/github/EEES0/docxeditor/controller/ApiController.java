@@ -11,12 +11,16 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
-public class CreateController {
+public class ApiController {
     private final CreateDocx createDocx;
     private final CreateHwp createHwp;
-    public CreateController(CreateDocx createDocx, CreateHwp createHwp) {
+    public ApiController(CreateDocx createDocx, CreateHwp createHwp) {
         this.createDocx = createDocx;
         this.createHwp = createHwp;
+    }
+    @GetMapping("/ping")
+    public String ping() {
+        return "wakeup";
     }
 
     @PostMapping("/docx")

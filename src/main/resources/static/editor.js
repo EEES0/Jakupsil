@@ -2,6 +2,7 @@ import { Editor } from "https://esm.sh/@tiptap/core@3.31.3";
 import StarterKit from "https://esm.sh/@tiptap/starter-kit@3.31.3";
 import TextAlign from "https://esm.sh/@tiptap/extension-text-align@3.31.3";
 import { TextStyle, FontSize } from "https://esm.sh/@tiptap/extension-text-style@3.31.3";
+
 const editor = new Editor({
     element: document.getElementById("editor"),
 
@@ -113,4 +114,32 @@ document.getElementById("hwp-download").addEventListener("click", async () => {
     a.remove();
 
     URL.revokeObjectURL(url);
+});
+
+async function pingServer() {
+    try {
+        const response = await fetch("/api/ping", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            console.warn("서버 확인 실패:", response.status);
+        }
+    } catch (error) {
+        console.warn("서버에 연결할 수 없습니다:", error);
+    }
+}
+
+pingServer();
+
+setInterval(() => {
+    if (document.visibilityState === "visible") {
+        pingServer();
+    }
+}, 5 * 60 * 1000);
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        pingServer();
+    }
 });
