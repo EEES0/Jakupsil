@@ -11,13 +11,16 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:63442")
 public class CreateController {
     private final CreateDocx createDocx;
     private final CreateHwp createHwp;
     public CreateController(CreateDocx createDocx, CreateHwp createHwp) {
         this.createDocx = createDocx;
         this.createHwp = createHwp;
+    }
+    @GetMapping("/health")
+    public ResponseEntity<Void> health() {
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/docx")
@@ -28,7 +31,7 @@ public class CreateController {
                 .header("Content-Disposition","attachment")
                 .header(
                         "Content-Type",
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        "application/vnd.hancom.hwp"
                 )
                 .body(file);
     }

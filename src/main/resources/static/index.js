@@ -19,6 +19,7 @@ const editor = new Editor({
     ],
 });
 
+
 document.getElementById("align-left").addEventListener("click", () => {
     editor.chain().focus().setTextAlign("left").run();
 });
@@ -62,7 +63,7 @@ whiteInput.addEventListener("click", () => {
 
 document.getElementById("docx-download").addEventListener("click", async () => {
     const content = editor.getJSON();
-    const response = await fetch("http://localhost:8080/api/docx", {
+    const response = await fetch("/api/docx", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -90,7 +91,7 @@ document.getElementById("docx-download").addEventListener("click", async () => {
 });
 document.getElementById("hwp-download").addEventListener("click", async () => {
     const content = editor.getJSON();
-    const response = await fetch("http://localhost:8080/api/hwp", {
+    const response = await fetch("/api/hwp", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
