@@ -1,7 +1,7 @@
 package io.github.EEES0.docxeditor.controller;
 
 
-import io.github.EEES0.docxeditor.dto.CreateFileRequest;
+import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
 import io.github.EEES0.docxeditor.service.CreateDocx;
 import io.github.EEES0.docxeditor.service.CreateHwp;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,6 @@ public class CreateController {
     public CreateController(CreateDocx createDocx, CreateHwp createHwp) {
         this.createDocx = createDocx;
         this.createHwp = createHwp;
-    }
-    @GetMapping("/health")
-    public ResponseEntity<Void> health() {
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/docx")

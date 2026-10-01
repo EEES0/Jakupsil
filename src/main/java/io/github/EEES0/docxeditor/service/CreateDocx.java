@@ -1,6 +1,9 @@
 package io.github.EEES0.docxeditor.service;
 
-import io.github.EEES0.docxeditor.dto.*;
+import io.github.EEES0.docxeditor.dto.createFile.ContentNode;
+import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
+import io.github.EEES0.docxeditor.dto.createFile.Mark;
+import io.github.EEES0.docxeditor.dto.createFile.TextNode;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.stereotype.Service;
 

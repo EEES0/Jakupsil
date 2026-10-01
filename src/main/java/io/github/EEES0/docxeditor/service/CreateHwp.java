@@ -1,8 +1,8 @@
 package io.github.EEES0.docxeditor.service;
 
-import io.github.EEES0.docxeditor.dto.ContentNode;
-import io.github.EEES0.docxeditor.dto.CreateFileRequest;
-import io.github.EEES0.docxeditor.dto.TextNode;
+import io.github.EEES0.docxeditor.dto.createFile.ContentNode;
+import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
+import io.github.EEES0.docxeditor.dto.createFile.TextNode;
 import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.object.bodytext.Section;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.Paragraph;
@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 
-//TODO: refactor required
+/*TODO: this is beta
+actually bad code
+sorry for me
+**/
 @Service
 public class CreateHwp {
 

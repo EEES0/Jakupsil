@@ -1,6 +1,4 @@
-package io.github.EEES0.docxeditor.dto;
-
-import java.util.List;
+package io.github.EEES0.docxeditor.dto.createFile;
 
 public record Mark(
         String type,

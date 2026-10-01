@@ -1,4 +1,4 @@
-package io.github.EEES0.docxeditor.dto;
+package io.github.EEES0.docxeditor.dto.createFile;
 import java.util.List;
 public record ContentNode(
         String type,
