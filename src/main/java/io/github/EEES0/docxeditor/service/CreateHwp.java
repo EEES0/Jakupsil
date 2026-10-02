@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 
-/*TODO: this is beta
-actually bad code
-sorry for me
+/*TODO: 언젠가 완성할것
 **/
 @Service
 public class CreateHwp {

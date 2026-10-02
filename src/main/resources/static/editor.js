@@ -87,34 +87,7 @@ document.getElementById("docx-download").addEventListener("click", async () => {
 
     URL.revokeObjectURL(url);
 });
-document.getElementById("hwp-download").addEventListener("click", async () => {
-    const content = editor.getJSON();
-    const response = await fetch("/api/hwp", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            content: content.content
-        })
-    });
-    console.log(content.content)
 
-    if (!response.ok) {
-        throw new Error("서버 응답 없음");
-    }
-
-    const result = await response.blob();
-    const url = URL.createObjectURL(result);
-    const a = document.createElement("a");
-
-    a.href = url;
-    a.download = title + ".hwp";
-    a.click();
-    a.remove();
-
-    URL.revokeObjectURL(url);
-});
 
 async function pingServer() {
     try {

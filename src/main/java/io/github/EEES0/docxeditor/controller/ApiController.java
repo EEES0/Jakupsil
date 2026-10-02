@@ -3,7 +3,7 @@ package io.github.EEES0.docxeditor.controller;
 
 import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
 import io.github.EEES0.docxeditor.service.CreateDocx;
-import io.github.EEES0.docxeditor.service.CreateHwp;
+//import io.github.EEES0.docxeditor.service.CreateHwp;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,8 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ApiController {
     private final CreateDocx createDocx;
-    private final CreateHwp createHwp;
-    public ApiController(CreateDocx createDocx, CreateHwp createHwp) {
+    public ApiController(CreateDocx createDocx) {
         this.createDocx = createDocx;
-        this.createHwp = createHwp;
     }
     @GetMapping("/ping")
     public String ping() {
@@ -35,7 +33,7 @@ public class ApiController {
                 )
                 .body(file);
     }
-
+    /*
     @PostMapping("/hwp")
     public ResponseEntity<byte[]> createHwpByte(@RequestBody CreateFileRequest request) throws Exception {
         byte[] file = createHwp.createHwpByte(request);
@@ -48,5 +46,6 @@ public class ApiController {
                 )
                 .body(file);
     }
+     */
 
 }
