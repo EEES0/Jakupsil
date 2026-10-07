@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
@@ -15,8 +16,10 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ApiController {
     private final CreateDocx createDocx;
-    public ApiController(CreateDocx createDocx) {
+    private final ObjectMapper objectMapper;
+    public ApiController(CreateDocx createDocx, ObjectMapper objectMapper) {
         this.createDocx = createDocx;
+        this.objectMapper = objectMapper;
     }
     private static final Logger log = LoggerFactory.getLogger(ApiController.class);
 
@@ -28,7 +31,7 @@ public class ApiController {
     @PostMapping("/docx")
     public ResponseEntity<byte[]> createDocxByte(@RequestBody CreateFileRequest request) throws IOException {
         byte[] file = createDocx.createDocxByte(request);
-        log.info("Request JSON : {}", request);
+        log.info("Request JSON : {}", objectMapper.writeValueAsString(request));
 
         return ResponseEntity.ok()
                 .header("Content-Disposition","attachment")
