@@ -7,7 +7,7 @@
 
 ## 서비스 주소
 
-- 배포 주소: [주소 입력]
+- 배포 주소: jakupsil.onrender.com
 - GitHub: github.com/EEES0/Jakupsil
 
 ## 개발 목적
