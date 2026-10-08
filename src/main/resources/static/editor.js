@@ -70,7 +70,6 @@ document.getElementById("docx-download").addEventListener("click", async () => {
             content: content.content
         })
     });
-    console.log(content.content)
 
     if (!response.ok) {
         throw new Error("서버 응답 없음");
