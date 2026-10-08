@@ -3,7 +3,6 @@ package io.github.EEES0.docxeditor.controller;
 
 import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
 import io.github.EEES0.docxeditor.service.CreateDocx;
-//import io.github.EEES0.docxeditor.service.CreateHwp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -42,19 +41,5 @@ public class ApiController {
                 .body(file);
 
     }
-    /*
-    @PostMapping("/hwp")
-    public ResponseEntity<byte[]> createHwpByte(@RequestBody CreateFileRequest request) throws Exception {
-        byte[] file = createHwp.createHwpByte(request);
-
-        return ResponseEntity.ok()
-                .header("Content-Disposition","attachment")
-                .header(
-                        "Content-Type",
-                        "application/vnd.hancom.hwp"
-                )
-                .body(file);
-    }
-     */
 
 }
