@@ -385,8 +385,7 @@ body.dark #editor .tiptap {
     margin: 0;
 }
 
-#file-download:disabled,
-#file-format:disabled {
+#file-download:disabled {
     opacity: 0.6;
     cursor: wait;
 }
@@ -485,4 +484,10 @@ body.dark #file-format {
     #file-format::picker-icon {
         color: var(--text-soft);
     }
+}
+
+/* 전용 에디터의 파일 형식은 고정합니다. */
+#file-format:disabled {
+    opacity: 1;
+    cursor: default;
 }

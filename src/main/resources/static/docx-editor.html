@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>작업실 — DOCX 문서 편집</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="dark" data-document-format="docx">
+<div id="toolbar">
+    <a id="hub-link" href="index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14"/></svg>
+        <span>허브로 돌아가기</span>
+    </a>
+
+    <div id="toolbar-controls">
+    <input type="text" id="doc-title" aria-label="문서 제목" placeholder="문서 제목을 입력하세요..."/>
+    <p>|</p>
+    <select id="font-size" aria-label="글자 크기 (pt)">
+        <option value="11px">8</option>
+        <option value="12px">9</option>
+        <option value="13px">10</option>
+        <option value="14px" selected>11 (기본값)</option>
+        <option value="16px">12</option>
+        <option value="18px">14</option>
+        <option value="21px">16</option>
+        <option value="24px">18</option>
+        <option value="26px">20</option>
+        <option value="29px">22</option>
+        <option value="32px">24</option>
+        <option value="34px">26</option>
+        <option value="37px">28</option>
+        <option value="48px">36</option>
+        <option value="64px">48</option>
+        <option value="90px">72</option>
+    </select>
+    <p>|</p>
+
+    <button type="button" id="bold" aria-label="굵게" title="굵게" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+                           fill="none" stroke="currentColor" stroke-width="2"
+                           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 4h7a4 4 0 0 1 0 8H6z"/>
+        <path d="M6 12h8a4 4 0 0 1 0 8H6z"/>
+        </svg>
+    </button>
+    <button type="button" id="underline" aria-label="밑줄" title="밑줄" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 4v7a6 6 0 0 0 12 0V4"/>
+            <path d="M4 21h16"/>
+        </svg>
+    </button>
+    <button type="button" id="italic" aria-label="기울임" title="기울임" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 4h10M4 20h10M15 4 9 20"/>
+        </svg>
+
+    </button>
+
+    <p>|</p>
+
+    <button type="button" id="align-left" aria-label="왼쪽 정렬" title="왼쪽 정렬" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+            <path d="M4 5h16M4 10h10M4 15h16M4 20h10"/>
+        </svg>
+    </button>
+    <button type="button" id="align-center" aria-label="가운데 정렬" title="가운데 정렬" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+            <path d="M4 5h16M7 10h10M4 15h16M7 20h10"/>
+        </svg>
+    </button>
+    <button type="button" id="align-right" aria-label="오른쪽 정렬" title="오른쪽 정렬" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+            <path d="M4 5h16M10 10h10M4 15h16M10 20h10"/>
+        </svg>
+    </button>
+    <p>|</p>
+    <button type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="true">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13z"/>
+        </svg>
+    </button>
+    <p>|</p>
+    <button type="button" id="white-mode" aria-label="라이트 모드" title="라이트 모드" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2
+             M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42
+             M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
+        </svg>
+    </button>
+
+    </div>
+</div>
+
+<div id="editor"></div>
+<div id="download-controls">
+    <label for="file-format">파일 형식</label>
+    <select id="file-format" disabled>
+        <option value="docx" selected>DOCX</option>
+    </select>
+    <button type="button" id="file-download" aria-describedby="download-status">다운로드</button>
+</div>
+<p id="download-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<script type="module" src="js/editor/main.js"></script>
+</body>
+</html>

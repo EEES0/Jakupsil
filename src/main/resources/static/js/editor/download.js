@@ -1,4 +1,4 @@
-export function initDownload(editor) {
+export function initDownload(editor, documentFormat) {
     const titleInput = document.getElementById("doc-title");
     const downloadButton = document.getElementById("file-download");
     const fileFormatSelect = document.getElementById("file-format");
@@ -8,14 +8,10 @@ export function initDownload(editor) {
         pdf: "/api/pdf"
     };
 
-    fileFormatSelect.addEventListener("change", () => {
-        downloadStatus.textContent = "";
-    });
-
     downloadButton.addEventListener("click", async () => {
         if (downloadButton.disabled) return;
 
-        const extension = fileFormatSelect.value;
+        const extension = documentFormat;
         const endpoint = downloadEndpoints[extension];
         if (!endpoint) {
             downloadStatus.textContent = "지원하는 파일 형식을 선택해주세요.";
@@ -63,7 +59,7 @@ export function initDownload(editor) {
             downloadStatus.textContent = "파일을 다운로드하지 못했습니다. 서버 연결 및 선택한 형식의 지원 여부를 확인하고 다시 시도해주세요.";
         } finally {
             downloadButton.disabled = false;
-            fileFormatSelect.disabled = false;
+            fileFormatSelect.disabled = true;
             downloadButton.textContent = "다운로드";
             downloadButton.setAttribute("aria-busy", "false");
         }

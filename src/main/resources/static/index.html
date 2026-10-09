@@ -24,7 +24,7 @@
             <p class="eyebrow">YOUR DOCUMENT WORKSPACE</p>
             <h1 id="hero-title">내가 쓰려고 만든 작업실</h1>
             <p class="hero-description">만들고, 바꾸고, 정리하세요.<br>지금 필요한 도구를 작업실에서 찾아보세요.</p>
-            <a class="start-button" href="editor.html">문서 작성 시작하기 <span aria-hidden="true">→</span></a>
+            <a class="start-button" href="docx-editor.html">문서 작성 시작하기 <span aria-hidden="true">→</span></a>
         </section>
         <div class="tool-discovery">
             <div class="search-field" id="search-field" hidden>
@@ -34,16 +34,23 @@
             </div>
             <nav class="category-nav" aria-label="도구 카테고리"><a href="#create">문서 생성</a><a href="#convert">파일 변환</a><a href="#pdf">PDF 도구</a></nav>
         </div>
-        <p class="search-status" id="search-status" role="status" aria-live="polite" aria-atomic="true">9개 도구 · 1개 사용 가능</p>
+        <p class="search-status" id="search-status" role="status" aria-live="polite" aria-atomic="true">10개 도구 · 2개 사용 가능</p>
         <div id="tool-list">
         <section class="tool-section" id="create" aria-labelledby="create-title">
-            <div class="section-heading"><div><h2 id="create-title">문서 생성</h2><p>빈 문서에서 완성 파일까지.</p></div><span class="section-count">1개 도구</span></div>
+            <div class="section-heading"><div><h2 id="create-title">문서 생성</h2><p>빈 문서에서 완성 파일까지.</p></div><span class="section-count">2개 도구</span></div>
             <div class="tool-grid">
-                <a class="tool-card is-available" data-tool-name="문서 생성" data-tool-keywords="DOCX PDF 문서 생성기" href="editor.html">
+                <a class="tool-card is-available" data-tool-name="DOCX 문서 생성기" href="docx-editor.html">
                     <div class="card-top"><span class="tool-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span class="tool-status is-ready">사용 가능</span></div>
-                    <h3>문서 생성</h3>
-                    <p>한 에디터에서 문서를 작성하고 다운로드할 파일 형식을 선택하세요.</p>
-                    <div class="tool-formats" aria-label="문서 파일 형식"><span>DOCX</span><span>PDF · 준비 중</span></div>
+                    <h3>DOCX 문서 생성기</h3>
+                    <p>글자 서식과 문단 정렬을 편집하고 DOCX 파일로 저장하세요.</p>
+                    <div class="tool-formats" aria-label="문서 파일 형식"><span>DOCX</span></div>
+                    <span class="card-action">문서 작성하기 <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="tool-card is-available" data-tool-name="PDF 문서 생성기" href="pdf-editor.html">
+                    <div class="card-top"><span class="tool-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span class="tool-status is-ready">사용 가능</span></div>
+                    <h3>PDF 문서 생성기</h3>
+                    <p>굵게, 밑줄, 글자 크기와 문단 정렬을 적용해 PDF 파일로 저장하세요.</p>
+                    <div class="tool-formats" aria-label="문서 파일 형식"><span>PDF</span></div>
                     <span class="card-action">문서 작성하기 <span aria-hidden="true">↗</span></span>
                 </a>
             </div>

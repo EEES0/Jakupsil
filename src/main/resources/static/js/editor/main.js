@@ -8,11 +8,15 @@ import { initTheme } from "./theme.js";
 import { initDownload } from "./download.js";
 import { initServerPing } from "./server.js";
 
+const documentFormat = document.body.dataset.documentFormat;
+
 const editor = new Editor({
     element: document.getElementById("editor"),
 
     extensions: [
-        StarterKit,
+        StarterKit.configure({
+            italic: documentFormat === "pdf" ? false : {}
+        }),
         TextAlign.configure({
             types: ['heading', 'paragraph']
         }),
@@ -23,5 +27,5 @@ const editor = new Editor({
 
 initToolbar(editor);
 initTheme();
-initDownload(editor);
+initDownload(editor, documentFormat);
 initServerPing();
