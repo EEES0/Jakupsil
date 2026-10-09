@@ -491,3 +491,44 @@ body.dark #file-format {
     opacity: 1;
     cursor: default;
 }
+
+/* 생성한 PDF는 직접 눌러 저장할 수 있도록 유지합니다. */
+#pdf-save-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 16px;
+}
+
+#pdf-save-controls[hidden],
+#pdf-share-button[hidden] {
+    display: none;
+}
+
+#pdf-save-link,
+#pdf-share-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#pdf-save-link:hover,
+#pdf-share-button:hover {
+    background: var(--hover);
+}
+
+#pdf-save-link:focus-visible {
+    outline: 2px solid var(--text-soft);
+    outline-offset: 3px;
+}
