@@ -2,16 +2,17 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Docx</title>
-    <link rel="stylesheet" href ="editor.css"/>
+    <title>작업실 — 문서 편집</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/editor.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div id="toolbar">
 
-    <input type="text" id="doc-title" placeholder="문서 제목을 입력하세요..."/>
+    <input type="text" id="doc-title" aria-label="문서 제목" placeholder="문서 제목을 입력하세요..."/>
     <p>|</p>
-    <select id="font-size">
+    <select id="font-size" aria-label="글자 크기 (pt)">
         <option value="11px">8</option>
         <option value="12px">9</option>
         <option value="13px">10</option>
@@ -31,7 +32,7 @@
     </select>
     <p>|</p>
 
-    <button id="bold">
+    <button type="button" id="bold" aria-label="굵게" title="굵게" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
                            fill="none" stroke="currentColor" stroke-width="2"
                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -39,7 +40,7 @@
         <path d="M6 12h8a4 4 0 0 1 0 8H6z"/>
         </svg>
     </button>
-    <button id="underline">
+    <button type="button" id="underline" aria-label="밑줄" title="밑줄" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -47,7 +48,7 @@
             <path d="M4 21h16"/>
         </svg>
     </button>
-    <button id="italic">
+    <button type="button" id="italic" aria-label="기울임" title="기울임" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -58,21 +59,21 @@
 
     <p>|</p>
 
-    <button id="align-left">
+    <button type="button" id="align-left" aria-label="왼쪽 정렬" title="왼쪽 정렬" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true">
             <path d="M4 5h16M4 10h10M4 15h16M4 20h10"/>
         </svg>
     </button>
-    <button id="align-center">
+    <button type="button" id="align-center" aria-label="가운데 정렬" title="가운데 정렬" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true">
             <path d="M4 5h16M7 10h10M4 15h16M7 20h10"/>
         </svg>
     </button>
-    <button id="align-right">
+    <button type="button" id="align-right" aria-label="오른쪽 정렬" title="오른쪽 정렬" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true">
@@ -80,7 +81,7 @@
         </svg>
     </button>
     <p>|</p>
-    <button id="dark-mode">
+    <button type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -88,7 +89,7 @@
         </svg>
     </button>
     <p>|</p>
-    <button id="white-mode">
+    <button type="button" id="white-mode" aria-label="라이트 모드" title="라이트 모드" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" aria-hidden="true">
@@ -102,7 +103,16 @@
 </div>
 
 <div id="editor"></div>
-<button id="docx-download">다운로드</button>
-<script type = "module" src="editor.js"></script>
+<div id="download-controls">
+    <label for="file-format">파일 형식</label>
+    <select id="file-format">
+        <option value="docx" selected>DOCX</option>
+        <option value="hwp">HWP ( 출시 예정 )</option>
+        <option value="pdf">PDF ( 출시 예정 )</option>
+    </select>
+    <button type="button" id="docx-download" aria-describedby="download-status">다운로드</button>
+</div>
+<p id="download-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<script type="module" src="/js/editor/main.js"></script>
 </body>
 </html>
