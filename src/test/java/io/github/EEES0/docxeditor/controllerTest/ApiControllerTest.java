@@ -4,6 +4,7 @@ package io.github.EEES0.docxeditor.controllerTest;
 import io.github.EEES0.docxeditor.controller.ApiController;
 import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
 import io.github.EEES0.docxeditor.service.CreateDocx;
+import io.github.EEES0.docxeditor.service.CreatePdf;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -23,6 +24,8 @@ public class ApiControllerTest {
     private MockMvc mockMvc;
     @MockitoBean
     private CreateDocx createDocx;
+    @MockitoBean
+    private CreatePdf createPdf;
 
     @Test
     public void createDocxByte() throws Exception {
@@ -78,5 +81,6 @@ public class ApiControllerTest {
 
         then(createDocx).should().createDocxByte(any(CreateFileRequest.class));
     }
+    //pdf 생성 테스트도 추가하기
 }
 
