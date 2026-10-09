@@ -4,7 +4,8 @@ export function initToolbar(editor) {
         { format: "bold", command: "toggleBold" },
         { format: "underline", command: "toggleUnderline" },
         { format: "italic", command: "toggleItalic" }
-    ].map((item) => ({ ...item, button: document.getElementById(item.format) }));
+    ].map((item) => ({ ...item, button: document.getElementById(item.format) }))
+        .filter(({ button }) => button !== null);
     const alignmentButtons = ["left", "center", "right"].map((alignment) => ({
         alignment,
         button: document.getElementById("align-" + alignment)
