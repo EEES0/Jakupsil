@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>작업실 — 문서 편집</title>
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/editor.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/editor.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body class="dark">
 <div id="toolbar">
+    <a id="hub-link" href="index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14"/></svg>
+        <span>허브로 돌아가기</span>
+    </a>
 
+    <div id="toolbar-controls">
     <input type="text" id="doc-title" aria-label="문서 제목" placeholder="문서 제목을 입력하세요..."/>
     <p>|</p>
     <select id="font-size" aria-label="글자 크기 (pt)">
@@ -81,7 +86,7 @@
         </svg>
     </button>
     <p>|</p>
-    <button type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="false">
+    <button type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="true">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -100,6 +105,7 @@
         </svg>
     </button>
 
+    </div>
 </div>
 
 <div id="editor"></div>
@@ -107,12 +113,11 @@
     <label for="file-format">파일 형식</label>
     <select id="file-format">
         <option value="docx" selected>DOCX</option>
-        <option value="hwp">HWP ( 출시 예정 )</option>
         <option value="pdf">PDF ( 출시 예정 )</option>
     </select>
-    <button type="button" id="docx-download" aria-describedby="download-status">다운로드</button>
+    <button type="button" id="file-download" aria-describedby="download-status">다운로드</button>
 </div>
 <p id="download-status" role="status" aria-live="polite" aria-atomic="true"></p>
-<script type="module" src="/js/editor/main.js"></script>
+<script type="module" src="js/editor/main.js"></script>
 </body>
 </html>

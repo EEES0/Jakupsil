@@ -51,10 +51,9 @@ body {
     top: 0;
     z-index: 100;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr) 170px;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
     gap: 6px;
 
     min-height: 58px;
@@ -64,6 +63,43 @@ body {
     background: color-mix(in srgb, var(--surface) 94%, transparent);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
+}
+
+#toolbar-controls {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+#hub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    min-height: 44px;
+    justify-self: start;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface-soft);
+    color: var(--text);
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+}
+
+#hub-link:hover {
+    background: var(--hover);
+}
+
+#hub-link:focus-visible {
+    outline: 2px solid var(--text-soft);
+    outline-offset: 3px;
 }
 
 #toolbar p {
@@ -202,7 +238,7 @@ body {
 }
 
 /* 다운로드 버튼 */
-#docx-download {
+#file-download {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -225,16 +261,16 @@ body {
     transform 0.08s ease;
 }
 
-#docx-download {
+#file-download {
     background: var(--text);
     color: var(--surface);
 }
 
-#docx-download:hover {
+#file-download:hover {
     opacity: 0.85;
 }
 
-#docx-download:active {
+#file-download:active {
     transform: scale(0.97);
 }
 
@@ -245,6 +281,16 @@ button:focus-visible {
 
 body.dark #editor .tiptap {
     caret-color: #ffffff;
+}
+
+@media (max-width: 1200px) {
+    #toolbar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #toolbar-controls {
+        grid-column: 1;
+    }
 }
 
 @media (max-width: 900px) {
@@ -260,7 +306,7 @@ body.dark #editor .tiptap {
 }
 
 @media (max-width: 650px) {
-    #toolbar {
+    #toolbar-controls {
         gap: 4px;
     }
 
@@ -298,7 +344,7 @@ body.dark #editor .tiptap {
         min-height: 700px;
     }
 
-    #docx-download {
+    #file-download {
         min-width: 125px;
         padding: 10px 16px;
     }
@@ -334,12 +380,12 @@ body.dark #editor .tiptap {
     outline-offset: 3px;
 }
 
-#download-controls #docx-download {
+#download-controls #file-download {
     min-height: 44px;
     margin: 0;
 }
 
-#docx-download:disabled,
+#file-download:disabled,
 #file-format:disabled {
     opacity: 0.6;
     cursor: wait;

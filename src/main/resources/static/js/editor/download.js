@@ -1,11 +1,10 @@
 export function initDownload(editor) {
     const titleInput = document.getElementById("doc-title");
-    const downloadButton = document.getElementById("docx-download");
+    const downloadButton = document.getElementById("file-download");
     const fileFormatSelect = document.getElementById("file-format");
     const downloadStatus = document.getElementById("download-status");
     const downloadEndpoints = {
         docx: "/api/docx",
-        hwp: "/api/hwp",
         pdf: "/api/pdf"
     };
 
