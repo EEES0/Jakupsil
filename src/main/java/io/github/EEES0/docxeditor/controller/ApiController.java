@@ -3,7 +3,6 @@ package io.github.EEES0.docxeditor.controller;
 
 import io.github.EEES0.docxeditor.dto.createFile.CreateFileRequest;
 import io.github.EEES0.docxeditor.service.CreateDocx;
-import io.github.EEES0.docxeditor.service.CreatePdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +15,10 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ApiController {
     private final CreateDocx createDocx;
-    private final CreatePdf createPdf;
     private final ObjectMapper objectMapper;
 
-    public ApiController(CreateDocx createDocx, ObjectMapper objectMapper, CreatePdf createPdf) {
+    public ApiController(CreateDocx createDocx, ObjectMapper objectMapper) {
         this.createDocx = createDocx;
-        this.createPdf = createPdf;
         this.objectMapper = objectMapper;
     }
     private static final Logger log = LoggerFactory.getLogger(ApiController.class);
@@ -46,17 +43,4 @@ public class ApiController {
 
     }
 
-    @PostMapping("/pdf")
-    public ResponseEntity<byte[]> createPdfByte(@RequestBody CreateFileRequest request) throws IOException {
-        byte[] file = createPdf.createPdfByte(request);
-        log.info("PDF Request JSON : {}", objectMapper.writeValueAsString(request));
-        return ResponseEntity.ok()
-                .header("Content-Disposition","attachment")
-                .header(
-                        "Content-Type",
-                        "application/pdf"
-                )
-                .body(file);
-    }
-
-}
+   }

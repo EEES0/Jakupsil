@@ -8,15 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="dark" data-document-format="docx">
-<div id="toolbar">
+<a class="skip-link" href="#document-workspace">문서 편집으로 이동</a>
+<aside id="workspace-sidebar" aria-label="작업 공간">
+    <a class="workspace-brand" href="index.html" title="Jakupsil 홈"><span class="brand-mark" aria-hidden="true">J</span><span class="sidebar-label">Jakupsil</span></a>
+    <p class="sidebar-caption sidebar-label">작업 공간</p>
+    <nav aria-label="문서 도구">
+        <a href="index.html" title="도구 모음"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="sidebar-label">도구 모음</span></a>
+        <a href="docx-editor.html" aria-current="page" title="DOCX 문서"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7zM14 3v5h4M8 12h6M8 16h6"/></svg><span class="sidebar-label">DOCX 문서</span></a>
+    </nav>
+    <p class="sidebar-footer sidebar-label">문서 작업을 위한 작은 공간</p>
+</aside>
+<div id="toolbar" role="region" aria-label="문서 편집 도구"><button type="button" id="sidebar-toggle" aria-controls="workspace-sidebar" aria-expanded="true" aria-label="사이드바 접기" title="사이드바 접기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button>
     <a id="hub-link" href="index.html">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14"/></svg>
         <span>허브로 돌아가기</span>
     </a>
 
     <div id="toolbar-controls">
-    <input type="text" id="doc-title" aria-label="문서 제목" placeholder="문서 제목을 입력하세요..."/>
-    <p>|</p>
     <select id="font-size" aria-label="글자 크기 (pt)">
         <option value="11px">8</option>
         <option value="12px">9</option>
@@ -35,7 +43,7 @@
         <option value="64px">48</option>
         <option value="90px">72</option>
     </select>
-    <p>|</p>
+    <span class="toolbar-divider" aria-hidden="true"></span>
 
     <button type="button" id="bold" aria-label="굵게" title="굵게" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
@@ -62,7 +70,7 @@
 
     </button>
 
-    <p>|</p>
+    <span class="toolbar-divider" aria-hidden="true"></span>
 
     <button type="button" id="align-left" aria-label="왼쪽 정렬" title="왼쪽 정렬" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
@@ -85,7 +93,7 @@
             <path d="M4 5h16M10 10h10M4 15h16M10 20h10"/>
         </svg>
     </button>
-    <p>|</p>
+    <span class="toolbar-divider" aria-hidden="true"></span>
     <button type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="true">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
@@ -93,7 +101,7 @@
             <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13z"/>
         </svg>
     </button>
-    <p>|</p>
+    <span class="toolbar-divider" aria-hidden="true"></span>
     <button type="button" id="white-mode" aria-label="라이트 모드" title="라이트 모드" aria-pressed="false">
         <svg width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2"
@@ -108,7 +116,7 @@
     </div>
 </div>
 
-<div id="editor"></div>
+<main id="document-workspace" tabindex="-1"><header class="document-heading"><p class="document-type">DOCX 문서</p><label class="sr-only" for="doc-title">문서 제목</label><input type="text" id="doc-title" placeholder="제목 없는 문서" autocomplete="off"/></header><div id="editor"></div>
 <div id="download-controls">
     <label for="file-format">파일 형식</label>
     <select id="file-format" disabled>
@@ -117,6 +125,6 @@
     <button type="button" id="file-download" aria-describedby="download-status">다운로드</button>
 </div>
 <p id="download-status" role="status" aria-live="polite" aria-atomic="true"></p>
-<script type="module" src="js/editor/main.js"></script>
+</main><script src="js/editor/workspace.js" defer></script><script type="module" src="js/editor/main.js"></script>
 </body>
 </html>
