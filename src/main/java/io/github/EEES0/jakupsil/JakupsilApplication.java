@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DocxeditorApplication {
+public class JakupsilApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DocxeditorApplication.class, args);
+		SpringApplication.run(JakupsilApplication.class, args);
 	}
 
 }

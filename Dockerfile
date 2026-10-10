@@ -14,7 +14,7 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Python 및 한글 폰트 설치
+# Python 및 폰트 설치
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python3 \
@@ -22,8 +22,17 @@ RUN apt-get update && \
         fonts-noto-cjk \
         fonts-nanum \
         fontconfig && \
-    fc-cache -fv && \
     rm -rf /var/lib/apt/lists/*
+
+# 프로젝트의 한글 TTF를 시스템 폰트로 등록
+COPY src/main/resources/fonts/NanumGothic.ttf \
+    /usr/local/share/fonts/jakupsil/NanumGothic.ttf
+
+COPY src/main/resources/fonts/NanumGothicBold.ttf \
+    /usr/local/share/fonts/jakupsil/NanumGothicBold.ttf
+
+RUN fc-cache -fv && \
+    fc-list :lang=ko
 
 # Python 의존성 설치
 COPY python/requirements.txt /app/python/requirements.txt
@@ -32,13 +41,13 @@ RUN python3 -m venv /app/python/.venv && \
     /app/python/.venv/bin/pip install --no-cache-dir \
         -r /app/python/requirements.txt
 
-# Python 변환 스크립트 복사
+# Python 변환 스크립트
 COPY python/convertDocxToPdf.py /app/python/convertDocxToPdf.py
 
-# Spring Boot JAR 복사
+# Spring Boot JAR
 COPY --from=build /app/build/libs/jakupsil.jar app.jar
 
-# Python 실행 경로 설정
+# Python 실행 경로
 ENV PYTHON_EXECUTABLE=/app/python/.venv/bin/python
 ENV PYTHON_SCRIPT=/app/python/convertDocxToPdf.py
 
