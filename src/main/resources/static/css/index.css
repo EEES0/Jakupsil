@@ -9,8 +9,6 @@ button { cursor: pointer; }
 .header-actions { display: flex; align-items: center; gap: 18px; }
 .github { font-size: 14px; color: var(--text-soft); }
 .github:hover { color: var(--text); }
-.theme-button { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 12px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text); font-size: 13px; }
-.theme-button:hover { background: var(--hover); }
 .hero { padding: 64px 0 40px; }
 .eyebrow { margin: 0 0 16px; color: var(--text-soft); font-size: 12px; font-weight: 600; letter-spacing: 2px; }
 h1 { margin: 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.25; letter-spacing: -1.6px; }
@@ -65,7 +63,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
     .logo span { display: none; }
     .header-actions { gap: 10px; }
     .github { font-size: 12px; }
-    .theme-button { padding: 0 9px; }
     .hero { padding: 40px 0 32px; }
     .hero-description { font-size: 14px; }
     .tool-discovery { align-items: stretch; gap: 12px; }

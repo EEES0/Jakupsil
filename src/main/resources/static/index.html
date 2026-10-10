@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>작업실 — 문서 도구 모음</title>
     <meta name="description" content="DOCX 문서 작성과 DOCX에서 PDF로의 변환 도구를 찾아보세요.">
-    <link rel="stylesheet" href="css/common.css?v=20261010-1">
-    <link rel="stylesheet" href="css/index.css?v=20261010-1">
-    <script src="js/index.js" defer></script>
+    <link rel="stylesheet" href="css/common.css?v=20261011-2">
+    <link rel="stylesheet" href="css/index.css?v=20261011-2">
+    <script type="module" src="js/index.js?v=20261011-2"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">본문으로 이동</a>
@@ -16,7 +16,23 @@
         <a class="logo" href="index.html">작업실<span>문서 도구 모음</span></a>
         <div class="header-actions">
             <a class="github" href="https://github.com/EEES0/docx-editor" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-            <button class="theme-button" id="theme-toggle" type="button" aria-label="다크 모드" aria-pressed="false" hidden><span aria-hidden="true">◐</span><span id="theme-label">다크 모드</span></button>
+            <button class="theme-button" type="button" id="dark-mode" aria-label="다크 모드" title="다크 모드" aria-pressed="true">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13z"/>
+        </svg>
+    </button>
+<button class="theme-button" type="button" id="white-mode" aria-label="라이트 모드" title="라이트 모드" aria-pressed="false">
+        <svg width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2
+             M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42
+             M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
+        </svg>
+    </button>
         </div>
     </header>
     <main id="main">
@@ -34,7 +50,7 @@
             </div>
             <nav class="category-nav" aria-label="도구 카테고리"><a href="#create">문서 생성</a><a href="#convert">파일 변환</a></nav>
         </div>
-        <p class="search-status" id="search-status" role="status" aria-live="polite" aria-atomic="true">2개 도구 · 1개 사용 가능</p>
+        <p class="search-status" id="search-status" role="status" aria-live="polite" aria-atomic="true">2개 도구 · 2개 사용 가능</p>
         <div id="tool-list">
         <section class="tool-section" id="create" aria-labelledby="create-title">
             <div class="section-heading"><div><h2 id="create-title">문서 생성</h2><p>가벼운 작업을 위한 에디터</p></div><span class="section-count">1개 도구</span></div>
@@ -51,12 +67,12 @@
         <section class="tool-section" id="convert" aria-labelledby="convert-title">
             <div class="section-heading"><div><h2 id="convert-title">파일 변환</h2><p>목적에 맞는 파일 형식으로 변환</p></div><span class="section-count">1개 도구</span></div>
             <div class="tool-grid">
-                <article class="tool-card" data-tool-name="DOCX → PDF">
-                    <div class="card-top"><span class="tool-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4"/></svg></span><span class="tool-status">준비 중</span></div>
+                <a class="tool-card is-available" data-tool-name="DOCX → PDF" href="docx-to-pdf.html">
+                    <div class="card-top"><span class="tool-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4"/></svg></span><span class="tool-status is-ready">사용 가능</span></div>
                     <h3>DOCX → PDF</h3>
                     <p>DOCX 문서를 PDF 파일로 변환하세요.</p>
-                    <span class="card-action">출시 예정</span>
-                </article>
+                    <span class="card-action">파일 변환하기 <span aria-hidden="true">↗</span></span>
+                </a>
             </div>
         </section>
         </div>
