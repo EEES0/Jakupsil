@@ -1,5 +1,11 @@
 import sys
+
 from word2pdf import convert
+from word2pdf.fonts import manager
+
+
+if "NanumGothic" not in manager.CJK_FALLBACKS:
+    manager.CJK_FALLBACKS.insert(0, "NanumGothic")
 
 
 def convert_pdf(docx_bytes: bytes) -> bytes:
