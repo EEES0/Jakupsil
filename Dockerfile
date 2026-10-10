@@ -19,7 +19,10 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python3 \
         python3-venv \
-        fonts-noto-cjk && \
+        fonts-noto-cjk \
+        fonts-nanum \
+        fontconfig && \
+    fc-cache -fv && \
     rm -rf /var/lib/apt/lists/*
 
 # Python 의존성 설치
