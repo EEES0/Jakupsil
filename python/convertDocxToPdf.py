@@ -3,7 +3,12 @@ from word2pdf import convert
 
 
 def convert_pdf(docx_byte : bytes) -> bytes:
-    return convert(docx_byte)
+    return convert(
+        docx_bytes,
+        default_font="Noto Sans CJK KR",
+        font_fallback="closest",
+        font_dirs=["/usr/share/fonts/opentype/noto"]
+    )
 
 
 if __name__ == "__main__":
