@@ -1,7 +1,7 @@
 export function initServerPing() {
     async function pingServer() {
         try {
-            const response = await fetch("/api/ping", {
+            const response = await fetch("/api/ping/ping", {
                 cache: "no-store"
             });
 

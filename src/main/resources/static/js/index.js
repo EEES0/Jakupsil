@@ -1,3 +1,5 @@
+import { initTheme } from "./editor/theme.js";
+
 (() => {
     const searchInput = document.getElementById("tool-search");
     const searchStatus = document.getElementById("search-status");
@@ -43,8 +45,6 @@
     document.getElementById("search-field").hidden = false;
     filterTools();
 
-    const themeButton = document.getElementById("theme-toggle");
-    const themeLabel = document.getElementById("theme-label");
     const themeKey = "jakupsil-theme";
     let savedTheme;
     try {
@@ -53,23 +53,15 @@
         // 저장소를 사용할 수 없어도 테마 전환은 유지합니다.
     }
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    function setTheme(isDark) {
-        document.body.classList.toggle("dark", isDark);
-        themeButton.setAttribute("aria-pressed", String(isDark));
-        themeButton.setAttribute("aria-label", isDark ? "라이트 모드" : "다크 모드");
-        themeLabel.textContent = isDark ? "라이트 모드" : "다크 모드";
-    }
-
-    setTheme(savedTheme === "dark" || (savedTheme !== "light" && prefersDark));
-    themeButton.hidden = false;
-    themeButton.addEventListener("click", () => {
-        const isDark = !document.body.classList.contains("dark");
-        setTheme(isDark);
-        try {
-            localStorage.setItem(themeKey, isDark ? "dark" : "light");
-        } catch (error) {
-            // 저장소를 사용할 수 없는 환경에서는 현재 화면에만 적용합니다.
-        }
+    document.body.classList.toggle("dark", savedTheme === "dark" || (savedTheme !== "light" && prefersDark));
+    initTheme();
+    ["dark-mode", "white-mode"].forEach((id) => {
+        document.getElementById(id).addEventListener("click", () => {
+            try {
+                localStorage.setItem(themeKey, document.body.classList.contains("dark") ? "dark" : "light");
+            } catch (error) {
+                // 저장소를 사용할 수 없는 환경에서는 현재 화면에만 적용합니다.
+            }
+        });
     });
 })();

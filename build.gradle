@@ -17,6 +17,10 @@ repositories {
 	mavenCentral()
 }
 
+tasks.named('bootJar') {
+	archiveFileName = 'jakupsil.jar'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	implementation 'org.apache.poi:poi-ooxml:5.5.1'
