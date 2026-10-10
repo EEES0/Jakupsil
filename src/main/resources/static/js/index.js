@@ -57,7 +57,7 @@
     function setTheme(isDark) {
         document.body.classList.toggle("dark", isDark);
         themeButton.setAttribute("aria-pressed", String(isDark));
-        themeButton.setAttribute("aria-label", "다크 모드");
+        themeButton.setAttribute("aria-label", isDark ? "라이트 모드" : "다크 모드");
         themeLabel.textContent = isDark ? "라이트 모드" : "다크 모드";
     }
 

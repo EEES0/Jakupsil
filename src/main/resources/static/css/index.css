@@ -1,35 +1,3 @@
-:root {
-    color-scheme: light;
-    --bg: #faf9f6;
-    --surface: #fff;
-    --surface-soft: #f3f2ee;
-    --text: #252525;
-    --text-soft: #77736c;
-    --border: #e8e5df;
-    --hover: #f7f7f5;
-    --accent: #303c31;
-    --accent-text: #fff;
-    --badge-bg: #edf1eb;
-    --badge-text: #435344;
-    --focus: #79977c;
-}
-
-body.dark {
-    color-scheme: dark;
-    --bg: #191919;
-    --surface: #202020;
-    --surface-soft: #292929;
-    --text: #f1f1ef;
-    --text-soft: #a6a49e;
-    --border: #333;
-    --hover: #252525;
-    --accent: #d4dfd0;
-    --accent-text: #202820;
-    --badge-bg: #2b372c;
-    --badge-text: #c0d0b9;
-    --focus: #9ab79d;
-}
-
 body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); word-break: keep-all; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; }
@@ -108,3 +76,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
 }
+
+/* 공통 작업 공간 토큰을 사용하는 도구 허브 */
+body { font-family: "Pretendard", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", sans-serif; }
+.site-header { min-height: 76px; }
+.hero { padding: 72px 0 48px; }
+.eyebrow { color: var(--text-soft); letter-spacing: 1px; }
+.tool-grid { gap: var(--space-4); }
+.tool-card { padding: var(--space-6); border-radius: var(--radius-lg); }
+.tool-card:not(.is-available):hover { background: var(--surface); }
+.tool-card.is-available:hover .card-action { color: var(--badge-text); }
+.category-nav a:hover { background: var(--hover); }
+@media (max-width: 600px) { .hero { padding: 40px 0 32px; } }
