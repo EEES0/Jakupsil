@@ -52,8 +52,7 @@ import { initTheme } from "./editor/theme.js";
     } catch (error) {
         // 저장소를 사용할 수 없어도 테마 전환은 유지합니다.
     }
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.body.classList.toggle("dark", savedTheme === "dark" || (savedTheme !== "light" && prefersDark));
+    document.body.classList.toggle("dark", savedTheme !== "light");
     initTheme();
     ["dark-mode", "white-mode"].forEach((id) => {
         document.getElementById(id).addEventListener("click", () => {
