@@ -25,7 +25,21 @@ export function initToolbar(editor) {
         editor.chain().focus().setFontSize(fontSizeSelect.value).run();
     });
 
+    const pageBreakButton = document.getElementById("page-break");
+    if (pageBreakButton) {
+        pageBreakButton.addEventListener("click", () => {
+            if (pageBreakButton.disabled) return;
+            editor.chain().focus().insertContent({ type: "pageBreak" })
+                .createParagraphNear().run();
+        });
+    }
+
     function updateToolbarState() {
+        if (pageBreakButton) {
+            // DTO는 최상위 ContentNode만 페이지 구분으로 처리합니다.
+            const { $from, $to } = editor.state.selection;
+            pageBreakButton.disabled = $from.depth > 1 || $to.depth > 1;
+        }
         formatButtons.forEach(({ button, format }) => {
             button.setAttribute("aria-pressed", String(editor.isActive(format)));
         });

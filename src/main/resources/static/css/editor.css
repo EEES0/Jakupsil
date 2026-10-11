@@ -552,3 +552,24 @@ button:focus-visible, #hub-link:focus-visible, #file-format:focus-visible, #pdf-
     #editor { margin-top: 24px; }
     #editor .tiptap { min-height: 50vh; }
 }
+/* DOCX의 명시적인 페이지 구분 */
+#toolbar #page-break { gap: var(--space-2); }
+#editor .tiptap .page-break {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin: var(--space-8) 0;
+    color: var(--text-soft);
+    font-size: 12px;
+    user-select: none;
+}
+#editor .tiptap .page-break::before,
+#editor .tiptap .page-break::after {
+    content: "";
+    flex: 1;
+    border-top: 1px dashed var(--border);
+}
+#editor .tiptap .page-break.ProseMirror-selectednode {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+}

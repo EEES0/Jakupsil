@@ -56,7 +56,10 @@ export function initDownload(editor, documentFormat) {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    content: content.content
+                    ...(extension === "docx" ? { type: content.type } : {}),
+                    content: content.content.map((node) =>
+                        node.type === "pageBreak" ? { type: "pageBreak" } : node
+                    )
                 })
             });
 

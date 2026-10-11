@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 public class CreateDocxTest {
-    CreateDocx createDocx = new CreateDocx();
+    private final CreateDocx createDocx = new CreateDocx();
     @Test
     void createDocxByteTest() throws IOException {
         CreateFileRequest request = MockCreateFileRequest.mockCreateFileRequest();

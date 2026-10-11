@@ -17,56 +17,63 @@ public class CreateDocx {
      * docx문서 생성하고 바이트 배열로 반환함
      */
     public byte[] createDocxByte(CreateFileRequest request) throws IOException {
-
+        try(
         XWPFDocument document = new XWPFDocument();
+        ByteArrayOutputStream out =
+                new ByteArrayOutputStream();
+        ) {
 
-        for (ContentNode content : request.content()) {
+            for (ContentNode content : request.content()) {
 
-            XWPFParagraph paragraph =
-                    document.createParagraph();
-            if (content.attrs() != null && content.attrs().textAlign() != null) {
-
-                switch (content.attrs().textAlign()) {
-                    case "left" -> paragraph.setAlignment(ParagraphAlignment.LEFT);
-
-                    case "center" -> paragraph.setAlignment(ParagraphAlignment.CENTER);
-
-                    case "right" -> paragraph.setAlignment(ParagraphAlignment.RIGHT);
-
+                if ("pageBreak".equals(content.type())) {
+                    XWPFParagraph breakParagraph = document.createParagraph();
+                    breakParagraph.createRun().addBreak(BreakType.PAGE);
+                    continue;
                 }
-            }
 
-            if (content.content() != null) {
-                for (TextNode textContent : content.content()) {
-                    XWPFRun run = paragraph.createRun();
-                    if (textContent.marks() != null) {
-                        for (Mark mark : textContent.marks()) {
-                            switch (mark.type()) {
-                                case "bold" -> run.setBold(true);
-                                case "underline" -> run.setUnderline(UnderlinePatterns.SINGLE);
-                                case "italic" -> run.setItalic(true);
-                            }
-                            if (mark.attrs() != null && mark.attrs().fontSize() != null) {
-                                int size = Integer.parseInt(
-                                        mark.attrs().fontSize()
-                                                .substring(0, mark.attrs().fontSize().length() - 2));
-                                run.setFontSize((int) Math.round(size * 0.75)); //px -> pt 변환 위해 0.75 곱하고 반올림
+                XWPFParagraph paragraph =
+                        document.createParagraph();
+
+                if (content.attrs() != null && content.attrs().textAlign() != null) {
+
+                    switch (content.attrs().textAlign()) {
+                        case "left" -> paragraph.setAlignment(ParagraphAlignment.LEFT);
+
+                        case "center" -> paragraph.setAlignment(ParagraphAlignment.CENTER);
+
+                        case "right" -> paragraph.setAlignment(ParagraphAlignment.RIGHT);
+
+                    }
+                }
+
+                if (content.content() != null) {
+                    for (TextNode textContent : content.content()) {
+                        XWPFRun run = paragraph.createRun();
+                        if (textContent.marks() != null) {
+                            for (Mark mark : textContent.marks()) {
+                                switch (mark.type()) {
+                                    case "bold" -> run.setBold(true);
+                                    case "underline" -> run.setUnderline(UnderlinePatterns.SINGLE);
+                                    case "italic" -> run.setItalic(true);
+                                }
+                                if (mark.attrs() != null && mark.attrs().fontSize() != null) {
+                                    int size = Integer.parseInt(
+                                            mark.attrs().fontSize()
+                                                    .substring(0, mark.attrs().fontSize().length() - 2));
+                                    run.setFontSize((int) Math.round(size * 0.75)); //px -> pt 변환 위해 0.75 곱하고 반올림
+                                }
                             }
                         }
+                        run.setText(textContent.text());
                     }
-                    run.setText(textContent.text());
                 }
             }
+
+
+            document.write(out);
+
+            return out.toByteArray();
         }
-
-        ByteArrayOutputStream out =
-        new ByteArrayOutputStream();
-
-        document.write(out);
-
-        document.close();
-
-        return out.toByteArray();
     }
 
 }
