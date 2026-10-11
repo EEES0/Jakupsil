@@ -4,7 +4,7 @@ export function initDownload(editor, documentFormat) {
     const fileFormatSelect = document.getElementById("file-format");
     const downloadStatus = document.getElementById("download-status");
     const downloadEndpoints = {
-        docx: "/api/documents/docx",
+        docx: "/api/docx",
         pdf: "/api/pdf"
     };
 

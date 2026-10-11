@@ -36,3 +36,6 @@
 .image-actions button:hover:not(:disabled) { background: var(--hover); }
 .image-actions button:disabled { opacity: .45; cursor: default; }
 @media (max-width: 600px) { .image-actions { flex-basis: 100%; justify-content: flex-end; } #image-files { font-size: 13px; } }
+
+#pdf-files { width: 100%; max-width: 420px; min-width: 0; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); background: var(--bg); font-size: 14px; }
+#pdf-files::file-selector-button { margin-right: 12px; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: var(--hover); color: var(--text); font: inherit; cursor: pointer; }
