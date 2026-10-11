@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>작업실 — DOCX에서 PDF로 변환</title>
     <link rel="stylesheet" href="css/common.css?v=20261011-2">
-    <link rel="stylesheet" href="css/editor.css?v=20261010-1">
-    <link rel="stylesheet" href="css/converter.css?v=20261011-1">
+    <link rel="stylesheet" href="css/editor.css?v=20261011-4">
+    <link rel="stylesheet" href="css/converter.css?v=20261011-3">
     <script src="js/editor/workspace.js" defer></script>
-    <script type="module" src="js/converter.js?v=20261011-1"></script>
+    <script type="module" src="js/converter.js?v=20261011-3"></script>
 </head>
 <body class="dark">
 <a class="skip-link" href="#document-workspace">파일 변환으로 이동</a>
@@ -54,13 +54,17 @@
             <input id="docx-file" name="file" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="file-help selected-file" required>
             <p id="selected-file" role="status">선택된 파일이 없습니다.</p>
         </div>
+        <div class="conversion-title">
+            <label for="pdf-title">PDF 제목 <span>(선택)</span></label>
+            <input id="pdf-title" type="text" placeholder="비워두면 원본 파일 이름을 사용합니다" aria-describedby="pdf-title-help" autocomplete="off">
+            <p id="pdf-title-help">제목을 입력하면 해당 이름으로 PDF가 다운로드됩니다.</p>
+        </div>
         <div class="conversion-actions">
             <button id="convert-button" type="submit" disabled aria-describedby="convert-status">PDF로 변환</button>
             <span>DOCX → PDF</span>
         </div>
     </form>
     <p id="convert-status" role="status" aria-live="polite" aria-atomic="true"></p>
-    <a id="converted-download" class="download-link" hidden download>PDF 파일 저장</a>
     <noscript><p>파일 변환을 사용하려면 JavaScript를 활성화해주세요.</p></noscript>
 </main>
 </body>

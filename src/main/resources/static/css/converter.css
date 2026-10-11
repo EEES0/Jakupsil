@@ -15,3 +15,9 @@
 #convert-status { min-height: 24px; margin: 20px 0 12px; color: var(--text-soft); font-size: 14px; line-height: 1.7; }
 .download-link { background: var(--surface-soft); color: var(--text); border: 1px solid var(--border); }
 @media (max-width: 600px) { .upload-field { padding: 32px 16px; } #docx-file { font-size: 13px; } }
+.conversion-title { display: grid; gap: var(--space-2); margin-top: var(--space-6); }
+.conversion-title label { font-size: 14px; font-weight: 600; }
+.conversion-title label span, .conversion-title p { color: var(--text-soft); font-size: 13px; font-weight: 400; }
+.conversion-title p { margin: 0; line-height: 1.6; }
+#pdf-title { width: 100%; min-width: 0; min-height: 44px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-size: 16px; }
+#pdf-title::placeholder { color: var(--placeholder); }

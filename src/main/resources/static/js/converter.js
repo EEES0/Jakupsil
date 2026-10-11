@@ -9,23 +9,14 @@ const fileInput = document.getElementById("docx-file");
 const selectedFile = document.getElementById("selected-file");
 const convertButton = document.getElementById("convert-button");
 const status = document.getElementById("convert-status");
-const downloadLink = document.getElementById("converted-download");
-let downloadUrl = null;
+const titleInput = document.getElementById("pdf-title");
 let isConverting = false;
 
-function clearDownload() {
-    downloadLink.hidden = true;
-    downloadLink.removeAttribute("href");
-    if (downloadUrl) URL.revokeObjectURL(downloadUrl);
-    downloadUrl = null;
-}
-
 function isValidFile(file) {
-    return Boolean(file && /.docx$/i.test(file.name) && file.size > 0);
+    return Boolean(file && /\.docx$/i.test(file.name) && file.size > 0);
 }
 
 fileInput.addEventListener("change", () => {
-    clearDownload();
     const file = fileInput.files[0];
     convertButton.disabled = !isValidFile(file);
     status.textContent = "";
@@ -46,10 +37,12 @@ form.addEventListener("submit", async (event) => {
         fileInput.focus();
         return;
     }
-    clearDownload();
+    const title = titleInput.value.trim().replace(/\.pdf$/i, "");
+    const filename = title ? title + ".pdf" : file.name.replace(/\.docx$/i, ".pdf");
     isConverting = true;
     convertButton.disabled = true;
     fileInput.disabled = true;
+    titleInput.disabled = true;
     convertButton.textContent = "변환 중…";
     convertButton.setAttribute("aria-busy", "true");
     status.textContent = "PDF로 변환하고 있습니다. 서버가 시작 중이면 시간이 걸릴 수 있습니다.";
@@ -67,11 +60,18 @@ form.addEventListener("submit", async (event) => {
         if (!pdf.size || !(response.headers.get("Content-Type") || "").toLowerCase().includes("application/pdf")) {
             throw new Error("PDF 파일을 받지 못했습니다. 다시 시도해주세요.");
         }
-        downloadUrl = URL.createObjectURL(pdf);
-        downloadLink.href = downloadUrl;
-        downloadLink.download = file.name.replace(/.docx$/i, ".pdf");
-        downloadLink.hidden = false;
-        status.textContent = "변환 완료. PDF 파일 저장 버튼을 눌러 다운로드해주세요.";
+        const url = URL.createObjectURL(pdf);
+        const link = document.createElement("a");
+        try {
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+        } finally {
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+        }
+        status.textContent = "변환 완료. " + filename + " 다운로드를 시작했습니다.";
     } catch (error) {
         status.textContent = error instanceof TypeError
             ? "서버에 연결할 수 없습니다. 네트워크 연결을 확인하고 다시 시도해주세요."
@@ -79,9 +79,9 @@ form.addEventListener("submit", async (event) => {
     } finally {
         isConverting = false;
         fileInput.disabled = false;
+        titleInput.disabled = false;
         convertButton.disabled = !isValidFile(fileInput.files[0]);
         convertButton.textContent = "PDF로 변환";
         convertButton.setAttribute("aria-busy", "false");
     }
 });
-window.addEventListener("pagehide", clearDownload);
