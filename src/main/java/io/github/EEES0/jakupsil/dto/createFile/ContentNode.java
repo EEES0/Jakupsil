@@ -5,5 +5,19 @@ public record ContentNode(
         Attrs attrs,
         List<TextNode> content
     ) {
+    @Override
+    public String type() {
+        return type;
+    }
+
+    @Override
+    public Attrs attrs() {
+        return attrs;
+    }
+
+    @Override
+    public List<TextNode> content() {
+        return content;
+    }
 }
 
