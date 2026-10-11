@@ -29,7 +29,7 @@ public class CreateDocxControllerTest {
         given(createDocx.createDocxByte(any(CreateFileRequest.class)))
                 .willReturn(mockByte);
 
-        mockMvc.perform(post("/api/documents/docx")
+        mockMvc.perform(post("/api/docx")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {

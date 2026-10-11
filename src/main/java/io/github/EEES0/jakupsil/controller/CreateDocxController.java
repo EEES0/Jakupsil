@@ -12,7 +12,7 @@ import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/documents/docx")
+@RequestMapping("/api/docx")
 public class CreateDocxController {
     private final CreateDocx createDocx;
     private final ObjectMapper objectMapper;

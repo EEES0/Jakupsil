@@ -5,7 +5,7 @@ import { TextStyle, FontSize } from "https://esm.sh/@tiptap/extension-text-style
 
 import { initToolbar } from "./toolbar.js?v=20261011-2";
 import { initTheme } from "./theme.js";
-import { initDownload } from "./download.js?v=20261011-3";
+import { initDownload } from "./download.js?v=20261012-1";
 import { initServerPing } from "./server.js?v=20261011-1";
 
 const documentFormat = document.body.dataset.documentFormat;
