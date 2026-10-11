@@ -25,6 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	implementation 'org.apache.poi:poi-ooxml:5.5.1'
 	implementation 'org.apache.pdfbox:pdfbox:3.0.6'
+	implementation 'com.drewnoakes:metadata-extractor:2.21.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

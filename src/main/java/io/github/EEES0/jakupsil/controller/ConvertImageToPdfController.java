@@ -20,7 +20,7 @@ public class ConvertImageToPdfController {
     }
 
     @PostMapping("")
-    public ResponseEntity<byte[]> convertImageToPdf(@RequestParam("images")MultipartFile[] images) throws IOException {
+    public ResponseEntity<byte[]> convertImageToPdf(@RequestParam("images")MultipartFile[] images) throws IOException, Exception {
         byte[] file = convertImageToPdf.convertImageToPdf(images);
         return ResponseEntity.ok()
                 .header("Content-Disposition","attachment")
