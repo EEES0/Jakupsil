@@ -1,7 +1,7 @@
 #document-workspace h1 { margin: 0; font-size: clamp(28px, 4vw, 36px); line-height: 1.4; letter-spacing: -1px; }
 .converter-description { margin: 12px 0 32px; color: var(--text-soft); font-size: 15px; line-height: 1.7; }
-.upload-field { display: grid; justify-items: center; gap: var(--space-3); padding: 40px 24px; border: 1px dashed var(--border); border-radius: var(--radius-lg); background: var(--surface-soft); text-align: center; }
-.upload-field > svg { color: var(--text-soft); }
+.upload-field { display: grid; justify-items: start; gap: var(--space-3); padding: 24px 0; border-block: 1px solid var(--border); background: transparent; text-align: left; }
+.upload-field > svg { display: none; }
 .upload-field label { font-size: 16px; font-weight: 600; }
 .upload-field p { margin: 0; color: var(--text-soft); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
 #docx-file { width: 100%; max-width: 420px; min-width: 0; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); background: var(--bg); font-size: 14px; }
@@ -14,17 +14,17 @@
 #convert-button[aria-busy="true"] { cursor: wait; }
 #convert-status { min-height: 24px; margin: 20px 0 12px; color: var(--text-soft); font-size: 14px; line-height: 1.7; }
 .download-link { background: var(--surface-soft); color: var(--text); border: 1px solid var(--border); }
-@media (max-width: 600px) { .upload-field { padding: 32px 16px; } #docx-file { font-size: 13px; } }
+@media (max-width: 600px) { .upload-field { padding: 20px 0; } #docx-file { font-size: 13px; } }
 .conversion-title { display: grid; gap: var(--space-2); margin-top: var(--space-6); }
 .conversion-title label { font-size: 14px; font-weight: 600; }
 .conversion-title label span, .conversion-title p { color: var(--text-soft); font-size: 13px; font-weight: 400; }
 .conversion-title p { margin: 0; line-height: 1.6; }
-#pdf-title { width: 100%; min-width: 0; min-height: 44px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-size: 16px; }
+#pdf-title { width: 80%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font-size: 16px; }
 #pdf-title::placeholder { color: var(--placeholder); }
 
 #image-files { width: 100%; max-width: 420px; min-width: 0; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); background: var(--bg); font-size: 14px; }
 #image-files::file-selector-button { margin-right: 12px; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: var(--hover); color: var(--text); font: inherit; cursor: pointer; }
-.image-list { display: grid; gap: var(--space-3); margin: var(--space-6) 0 0; padding: 0; list-style: none; }
+.image-list { display: grid; gap: 0; margin: var(--space-6) 0 0; padding: 0; list-style: none; }
 .image-list:empty { display: none; }
 .image-item { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
 .image-item img { width: 56px; height: 64px; object-fit: contain; background: var(--surface-soft); border-radius: var(--radius-sm); }
@@ -39,3 +39,8 @@
 
 #pdf-files { width: 100%; max-width: 420px; min-width: 0; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text); background: var(--bg); font-size: 14px; }
 #pdf-files::file-selector-button { margin-right: 12px; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: var(--hover); color: var(--text); font: inherit; cursor: pointer; }
+
+.conversion-title { padding-top: 24px; border-top: 1px solid var(--border); }
+.conversion-actions { padding-top: 24px; border-top: 1px solid var(--border); }
+
+@media (max-width: 600px) { #pdf-title { width: 100%; } }

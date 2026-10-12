@@ -45,22 +45,6 @@ import { initTheme } from "./editor/theme.js";
     document.getElementById("search-field").hidden = false;
     filterTools();
 
-    const themeKey = "jakupsil-theme";
-    let savedTheme;
-    try {
-        savedTheme = localStorage.getItem(themeKey);
-    } catch (error) {
-        // 저장소를 사용할 수 없어도 테마 전환은 유지합니다.
-    }
-    document.body.classList.toggle("dark", savedTheme !== "light");
+    document.body.classList.add("dark");
     initTheme();
-    ["dark-mode", "white-mode"].forEach((id) => {
-        document.getElementById(id).addEventListener("click", () => {
-            try {
-                localStorage.setItem(themeKey, document.body.classList.contains("dark") ? "dark" : "light");
-            } catch (error) {
-                // 저장소를 사용할 수 없는 환경에서는 현재 화면에만 적용합니다.
-            }
-        });
-    });
 })();
