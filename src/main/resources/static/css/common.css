@@ -22,10 +22,10 @@ select {
     --text-soft: #71717a;
     --border: #e4e4e7;
     --hover: #f0f0f3;
-    --active: #eeeeff;
-    --accent: #6366f1;
+    --active: #edf0f3;
+    --accent: #3f4c59;
     --accent-text: #ffffff;
-    --focus: #6366f1;
+    --focus: #526b82;
     --placeholder: #71717a;
     --badge-bg: #eeeeff;
     --badge-text: #4f46e5;
@@ -52,10 +52,10 @@ body.dark {
     --text-soft: #a1a1aa;
     --border: #303036;
     --hover: #27272c;
-    --active: #2c2c46;
-    --accent: #818cf8;
+    --active: #292e35;
+    --accent: #c6cdd5;
     --accent-text: #111113;
-    --focus: #818cf8;
+    --focus: #a7b8c9;
     --placeholder: #a1a1aa;
     --badge-bg: #2c2c46;
     --badge-text: #c7d2fe;
