@@ -1,5 +1,6 @@
 package io.github.EEES0.jakupsil.controller;
 
+import io.github.EEES0.jakupsil.service.ConvertImageToPdf;
 import io.github.EEES0.jakupsil.service.ImageContrastEnhance;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,15 +15,30 @@ import java.io.IOException;
 @RequestMapping("/api/enhancement/image")
 public class ImageContrastEnhanceController {
     private final ImageContrastEnhance imageContrastEnhance;
-    public ImageContrastEnhanceController(ImageContrastEnhance imageContrastEnhance) {
+    private final ConvertImageToPdf convertImageToPdf;
+    public ImageContrastEnhanceController(ImageContrastEnhance imageContrastEnhance, ConvertImageToPdf convertImageToPdf) {
         this.imageContrastEnhance = imageContrastEnhance;
+        this.convertImageToPdf = convertImageToPdf;
     }
 
     @PostMapping("")
-    public ResponseEntity<byte[]> imageContrastEnhance(@RequestParam("images")MultipartFile request) throws IOException {
+    public ResponseEntity<byte[]> imageContrastEnhance(@RequestParam("images")MultipartFile request, @RequestParam("saveType") String saveType) throws IOException {
+        if (!saveType.equals("png") && !saveType.equals("pdf")) {
+            return ResponseEntity.badRequest().build();
+        }
         byte[] result = imageContrastEnhance.imageContrastEnhance(request);
+        if (saveType.equals("pdf")) {
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment")
+                    .header(
+                            "Content-Type",
+                            "application/pdf"
+                    )
+                    .body(convertImageToPdf.convertImageBytesToPdf(result));
+
+        }
         return ResponseEntity.ok()
-                .header("Content-Disposition","attachment")
+                .header("Content-Disposition", "attachment")
                 .header(
                         "Content-Type",
                         "image/png"

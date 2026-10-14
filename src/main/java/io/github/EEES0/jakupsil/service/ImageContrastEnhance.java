@@ -1,6 +1,11 @@
 package io.github.EEES0.jakupsil.service;
 
 import nu.pattern.OpenCV;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -12,6 +17,7 @@ import org.opencv.imgproc.Imgproc;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 @Service
@@ -152,4 +158,7 @@ public class ImageContrastEnhance {
                 255.0
         );
     }
+
+
 }
+

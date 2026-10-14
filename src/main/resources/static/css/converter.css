@@ -47,3 +47,32 @@
 
 #enhance-image { width: 100%; max-width: 420px; min-width: 0; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); background: var(--bg); font-size: 16px; }
 #enhance-image::file-selector-button { margin-right: 12px; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: var(--hover); color: var(--text); font: inherit; cursor: pointer; }
+
+#save-type { min-width: 112px; max-width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-soft); color: var(--text); font: inherit; color-scheme: light; cursor: pointer; transition: background 150ms ease, border-color 150ms ease; }
+#save-type option { background: var(--surface); color: var(--text); }
+
+body.dark #save-type { color-scheme: dark; }
+#save-type:not(:disabled):hover { background: var(--hover); border-color: var(--text-soft); }
+#save-type:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+#save-type:disabled { opacity: .6; cursor: wait; }
+#save-type option:checked { background: var(--active); color: var(--text); font-weight: 600; }
+@supports (appearance: base-select) {
+    #save-type, #save-type::picker(select) { appearance: base-select; }
+    #save-type { align-items: center; gap: 24px; }
+    #save-type::picker(select) {
+        margin-block: 6px;
+        padding: 4px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        color: var(--text);
+        box-shadow: var(--shadow);
+        max-height: min(240px, 50vh);
+        overflow-y: auto;
+    }
+    #save-type option { min-height: 44px; padding: 10px 12px; gap: 12px; border-radius: 3px; cursor: pointer; }
+    #save-type option:hover { background: var(--hover); }
+    #save-type option:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+    #save-type option:checked { background: var(--active); }
+    #save-type::picker-icon { color: var(--text-soft); }
+}

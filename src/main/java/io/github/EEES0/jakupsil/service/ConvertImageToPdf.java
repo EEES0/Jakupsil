@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 @Service
 public class ConvertImageToPdf {
@@ -188,6 +189,48 @@ public class ConvertImageToPdf {
             return directory.getInt(
                     ExifIFD0Directory.TAG_ORIENTATION
             );
+        }
+    }
+
+    public byte[] convertImageBytesToPdf(byte[] imageBytes) throws IOException {
+        try (
+                PDDocument document = new PDDocument();
+                ByteArrayOutputStream output = new ByteArrayOutputStream()
+        ) {
+            PDImageXObject image = PDImageXObject.createFromByteArray(
+                    document,
+                    imageBytes,
+                    "enhanced-document"
+            );
+
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            float margin = 24;
+
+            float availableWidth = page.getMediaBox().getWidth() - margin * 2;
+            float availableHeight = page.getMediaBox().getHeight() - margin * 2;
+
+            float scale = Math.min(
+                    availableWidth / image.getWidth(),
+                    availableHeight / image.getHeight()
+            );
+
+            float width = image.getWidth() * scale;
+            float height = image.getHeight() * scale;
+
+            float x = (page.getMediaBox().getWidth() - width) / 2;
+            float y = (page.getMediaBox().getHeight() - height) / 2;
+
+            try (PDPageContentStream content =
+                         new PDPageContentStream(document, page)) {
+
+                content.drawImage(image, x, y, width, height);
+            }
+
+            document.save(output);
+
+            return output.toByteArray();
         }
     }
 }

@@ -8,6 +8,7 @@ const form = document.getElementById("convert-form");
 const fileInput = document.getElementById("enhance-image");
 const selectedFile = document.getElementById("selected-file");
 const convertButton = document.getElementById("convert-button");
+const saveTypeSelect = document.getElementById("save-type");
 const status = document.getElementById("convert-status");
 let isConverting = false;
 
@@ -36,10 +37,17 @@ form.addEventListener("submit", async (event) => {
         fileInput.focus();
         return;
     }
-    const filename = file.name.replace(/\.[^.]+$/, "") + ".png";
+    const saveType = saveTypeSelect.value;
+    const mimeTypes = { png: "image/png", pdf: "application/pdf" };
+    if (!mimeTypes[saveType]) {
+        status.textContent = "PNG 또는 PDF 형식을 선택해주세요.";
+        return;
+    }
+    const filename = file.name.replace(/\.[^.]+$/, "") + "." + saveType;
     isConverting = true;
     convertButton.disabled = true;
     fileInput.disabled = true;
+    saveTypeSelect.disabled = true;
     convertButton.textContent = "처리 중…";
     convertButton.setAttribute("aria-busy", "true");
     status.textContent = "이미지 대비를 강조하고 있습니다. 잠시 기다려주세요.";
@@ -47,17 +55,18 @@ form.addEventListener("submit", async (event) => {
     try {
         const body = new FormData();
         body.append("images", file);
+        body.append("saveType", saveType);
         const response = await fetch("/api/enhancement/image", { method: "POST", body });
         if (!response.ok) {
             if (response.status === 413) throw new Error("이미지가 너무 큽니다. 10MB 이하 이미지를 선택해주세요.");
             if (response.status === 400 || response.status === 415) throw new Error("처리할 수 없는 이미지입니다. 크기와 파일 형식을 확인해주세요.");
             throw new Error("이미지 처리에 실패했습니다. 읽을 수 있는 1,200만 픽셀 이하 이미지인지 확인해주세요.");
         }
-        const pdf = await response.blob();
-        if (!pdf.size || !(response.headers.get("Content-Type") || "").toLowerCase().includes("image/png")) {
-            throw new Error("PNG 이미지를 받지 못했습니다. 다시 시도해주세요.");
+        const result = await response.blob();
+        if (!result.size || !(response.headers.get("Content-Type") || "").toLowerCase().includes(mimeTypes[saveType])) {
+            throw new Error(saveType.toUpperCase() + " 파일을 받지 못했습니다. 다시 시도해주세요.");
         }
-        const url = URL.createObjectURL(pdf);
+        const url = URL.createObjectURL(result);
         const link = document.createElement("a");
         try {
             link.href = url;
@@ -76,6 +85,7 @@ form.addEventListener("submit", async (event) => {
     } finally {
         isConverting = false;
         fileInput.disabled = false;
+        saveTypeSelect.disabled = false;
         convertButton.disabled = !isValidFile(fileInput.files[0]);
         convertButton.textContent = "대비 강조 후 다운로드";
         convertButton.setAttribute("aria-busy", "false");

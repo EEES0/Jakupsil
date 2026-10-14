@@ -6,9 +6,9 @@
     <title>작업실 — 이미지 대비 강조</title>
     <link rel="stylesheet" href="css/common.css?v=20261012-3">
     <link rel="stylesheet" href="css/editor.css?v=20261011-4">
-    <link rel="stylesheet" href="css/converter.css?v=20261014-1">
+    <link rel="stylesheet" href="css/converter.css?v=20261014-3">
     <script src="js/editor/workspace.js" defer></script>
-    <script type="module" src="js/image-enhance.js?v=20261014-1"></script>
+    <script type="module" src="js/image-enhance.js?v=20261014-2"></script>
 </head>
 <body class="dark">
 <a class="skip-link" href="#document-workspace">파일 변환으로 이동</a>
@@ -45,7 +45,7 @@
 <main id="document-workspace" tabindex="-1">
     <p class="document-type">이미지 작업 · 대비 강조</p>
     <h1>이미지 대비 강조</h1>
-    <p class="converter-description">이미지의 그림자를 완화하고 대비를 강조합니다. 결과는 회색조 PNG로 저장됩니다.</p>
+    <p class="converter-description">이미지의 그림자를 완화하고 대비를 강조합니다. 회색조 결과를 PNG 또는 PDF로 저장할 수 있습니다.</p>
     <form id="convert-form">
         <div class="upload-field">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"/></svg>
@@ -55,8 +55,13 @@
             <p id="selected-file" role="status">선택된 파일이 없습니다.</p>
         </div>
         <div class="conversion-actions">
+            <label for="save-type">출력 형식</label>
+            <select id="save-type" name="saveType">
+                <option value="png" selected>PNG</option>
+                <option value="pdf">PDF</option>
+            </select>
             <button id="convert-button" type="submit" disabled aria-describedby="convert-status">대비 강조 후 다운로드</button>
-            <span>회색조 PNG</span>
+            <span>회색조 결과</span>
         </div>
     </form>
     <p id="convert-status" role="status" aria-live="polite" aria-atomic="true"></p>
