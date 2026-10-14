@@ -22,21 +22,9 @@ public class ImageContrastEnhanceController {
     }
 
     @PostMapping("")
-    public ResponseEntity<byte[]> imageContrastEnhance(@RequestParam("images")MultipartFile request, @RequestParam("saveType") String saveType) throws IOException {
-        if (!saveType.equals("png") && !saveType.equals("pdf")) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<byte[]> imageContrastEnhance(@RequestParam("images")MultipartFile request) throws IOException {
         byte[] result = imageContrastEnhance.imageContrastEnhance(request);
-        if (saveType.equals("pdf")) {
-            return ResponseEntity.ok()
-                    .header("Content-Disposition", "attachment")
-                    .header(
-                            "Content-Type",
-                            "application/pdf"
-                    )
-                    .body(convertImageToPdf.convertImageBytesToPdf(result));
 
-        }
         return ResponseEntity.ok()
                 .header("Content-Disposition", "attachment")
                 .header(
