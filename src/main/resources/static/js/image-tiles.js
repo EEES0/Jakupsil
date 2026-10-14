@@ -1,6 +1,6 @@
 export const TILE_SIZE = 1024;
 export const TILE_OVERLAP = 192;
-export const MAX_PIXELS = 48000000;
+export const MAX_PIXELS = 64000000;
 export const MAX_DIMENSION = 16384;
 const MAX_RETRIES = 2;
 const RETRY_DELAY = 1000;
@@ -100,7 +100,7 @@ export async function requestTile(blob, signal, onRetry = () => {}, expected) {
 export async function processTiles(original, output, signal, onProgress) {
     const { width, height } = original;
     if (!width || !height || width > MAX_DIMENSION || height > MAX_DIMENSION || width * height > MAX_PIXELS) {
-        throw new Error("브라우저 메모리 보호를 위해 최대 4,800만 픽셀·한 변 16,384픽셀까지 지원합니다. 축소한 이미지를 업로드해주세요.");
+        throw new Error("브라우저 메모리 보호를 위해 최대 6,400만 픽셀·한 변 16,384픽셀까지 지원합니다. 축소한 이미지를 업로드해주세요.");
     }
     const target = prepareCanvas(output, width, height);
     const work = document.createElement("canvas");
