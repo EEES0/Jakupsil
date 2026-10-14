@@ -24,7 +24,7 @@ import java.io.IOException;
 public class ImageContrastEnhance {
 
     private static final long MAX_FILE_SIZE = 10L * 1024 * 1024;
-    private static final long MAX_PIXELS = 12_000_000L;
+    private static final long MAX_PIXELS = 48_000_000L;
 
     static {
         OpenCV.loadLocally();
