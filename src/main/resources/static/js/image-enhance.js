@@ -1,6 +1,6 @@
 import { initTheme } from "./editor/theme.js";
 import { initServerPing } from "./editor/server.js?v=20261011-1";
-import { processTiles, canvasBlob, checkAbort } from "./image-tiles.js?v=20261014-5";
+import { processTiles, canvasBlob, checkAbort } from "./image-tiles.js?v=20261014-6";
 initTheme(); initServerPing();
 const get = id => document.getElementById(id);
 const form=get("convert-form"), input=get("enhance-image"), start=get("convert-button"), format=get("save-type"), cancel=get("cancel-enhance"), download=get("download-enhance"), status=get("convert-status"), progress=get("tile-progress"), comparison=get("enhance-comparison"), preview=get("original-preview"), output=get("enhanced-canvas"), zoom=get("compare-zoom");
