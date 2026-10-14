@@ -45,7 +45,7 @@ form.addEventListener("submit", async (event) => {
     titleInput.disabled = true;
     convertButton.textContent = "변환 중…";
     convertButton.setAttribute("aria-busy", "true");
-    status.textContent = "PDF로 변환하고 있습니다. 서버가 시작 중이면 시간이 걸릴 수 있습니다.";
+    status.textContent = "PDF로 변환 중입니다.";
 
     try {
         const body = new FormData();
@@ -74,7 +74,7 @@ form.addEventListener("submit", async (event) => {
         status.textContent = "변환 완료. " + filename + " 다운로드를 시작했습니다.";
     } catch (error) {
         status.textContent = error instanceof TypeError
-            ? "서버에 연결할 수 없습니다. 네트워크 연결을 확인하고 다시 시도해주세요."
+            ? "연결에 실패했습니다. 다시 시도해주세요."
             : error.message;
     } finally {
         isConverting = false;

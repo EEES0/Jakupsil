@@ -60,7 +60,7 @@ export function initDownload(editor, documentFormat) {
             downloadStatus.textContent = filename + " 다운로드를 시작했습니다.";
         } catch (error) {
             console.error("파일 다운로드 실패:", error);
-            downloadStatus.textContent = "파일을 다운로드하지 못했습니다. 서버 연결 및 선택한 형식의 지원 여부를 확인하고 다시 시도해주세요.";
+            downloadStatus.textContent = "다운로드에 실패했습니다. 다시 시도해주세요.";
         } finally {
             downloadButton.disabled = false;
             fileFormatSelect.disabled = true;
