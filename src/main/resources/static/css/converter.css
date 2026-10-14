@@ -76,3 +76,17 @@ body.dark #save-type { color-scheme: dark; }
     #save-type option:checked { background: var(--active); }
     #save-type::picker-icon { color: var(--text-soft); }
 }
+
+.tile-options { display: grid; gap: 8px; margin-top: 24px; }
+.tile-options p, .tile-help { color: var(--text-soft); font-size: 13px; line-height: 1.7; }
+#processing-mode, #compare-zoom { min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font-size: 16px; }
+#cancel-enhance, #download-enhance { min-height: 44px; padding: 10px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-soft); color: var(--text); cursor: pointer; }
+#cancel-enhance:disabled, #download-enhance:disabled { opacity: .5; cursor: default; }
+#tile-progress { display: block; width: 100%; height: 12px; accent-color: var(--accent); }
+.comparison-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0 16px; }
+.comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.comparison-grid figure { margin: 0; min-width: 0; }
+.comparison-grid figcaption { margin-bottom: 8px; font-size: 14px; }
+.image-viewport { max-width: 100%; height: 420px; overflow: auto; border: 1px solid var(--border); background: var(--surface-soft); }
+.image-viewport img, .image-viewport canvas { display: block; max-width: none; }
+@media (max-width: 760px) { .comparison-grid { grid-template-columns: minmax(0, 1fr); } .image-viewport { height: 320px; } }
