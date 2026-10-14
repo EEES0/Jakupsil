@@ -25,7 +25,7 @@ export function checkAbort(signal) {
 export function canvasBlob(canvas) {
     return new Promise((resolve, reject) => {
         try {
-            canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("이미지를 저장할 메모리가 부족합니다. 축소한 이미지를 업로드해주세요.")), "image/png");
+            canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("이미지를 저장하지 못했습니다. 크기를 줄여 다시 시도해주세요.")), "image/png");
         } catch (error) { reject(error); }
     });
 }
@@ -43,7 +43,7 @@ export function prepareCanvas(canvas, width, height) {
         context.clearRect(0, 0, width, height);
         return context;
     } catch {
-        throw new Error("이 이미지 크기를 브라우저에서 처리할 수 없습니다. 축소한 이미지를 업로드해주세요.");
+        throw new Error("이미지를 처리하지 못했습니다. 크기를 줄여 다시 시도해주세요.");
     }
 }
 
@@ -64,17 +64,17 @@ export async function requestTile(blob, signal, onRetry = () => {}, expected) {
             body.append("images", blob, "tile.png");
             const response = await fetch("/api/enhancement/image", { method: "POST", body, signal });
             if (!response.ok) {
-                const error = new Error("보정 API 오류 (" + response.status + "). 이미지와 서버 상태를 확인해주세요.");
+                const error = new Error("보정에 실패했습니다. 다시 시도해주세요.");
                 error.retryable = response.status >= 500 || response.status === 408 || response.status === 429;
                 throw error;
             }
             if ((response.headers.get("Content-Type") || "").split(";")[0].trim().toLowerCase() !== "image/png") {
-                const error = new Error("보정 API가 PNG가 아닌 응답을 반환했습니다.");
+                const error = new Error("보정된 이미지를 받지 못했습니다. 다시 시도해주세요.");
                 error.retryable = false;
                 throw error;
             }
             const result = await response.blob();
-            if (!result.size) throw new Error("보정 API가 빈 이미지를 반환했습니다.");
+            if (!result.size) throw new Error("보정된 이미지를 받지 못했습니다. 다시 시도해주세요.");
             checkAbort(signal);
             if (!expected) return result;
             let bitmap;
@@ -82,7 +82,7 @@ export async function requestTile(blob, signal, onRetry = () => {}, expected) {
                 bitmap = await createImageBitmap(result);
                 checkAbort(signal);
                 if (bitmap.width !== expected.width || bitmap.height !== expected.height) {
-                    const error = new Error("응답 크기 불일치: 전송 " + expected.width + "×" + expected.height + ", 응답 " + bitmap.width + "×" + bitmap.height + ". 서버가 크기를 변경했으므로 조립을 중단했습니다.");
+                    const error = new Error("보정된 이미지 크기가 달라 처리를 중단했습니다. 다시 시도해주세요.");
                     error.retryable = false;
                     throw error;
                 }
@@ -100,7 +100,7 @@ export async function requestTile(blob, signal, onRetry = () => {}, expected) {
 export async function processTiles(original, output, signal, onProgress) {
     const { width, height } = original;
     if (!width || !height || width > MAX_DIMENSION || height > MAX_DIMENSION || width * height > MAX_PIXELS) {
-        throw new Error("브라우저 메모리 보호를 위해 최대 6,400만 픽셀·한 변 16,384픽셀까지 지원합니다. 축소한 이미지를 업로드해주세요.");
+        throw new Error("이미지 해상도가 너무 큽니다. 크기를 줄여 다시 선택해주세요.");
     }
     const target = prepareCanvas(output, width, height);
     const work = document.createElement("canvas");
@@ -115,13 +115,13 @@ export async function processTiles(original, output, signal, onProgress) {
             context.drawImage(original, e.x, e.y, e.width, e.height, 0, 0, e.width, e.height);
             const blob = await canvasBlob(work);
             checkAbort(signal);
-            if (blob.size > 10 * 1024 * 1024) throw new Error("PNG 조각이 서버의 10MB 제한을 넘었습니다. 축소한 이미지를 업로드해주세요.");
+            if (blob.size > 10 * 1024 * 1024) throw new Error("이미지 크기를 줄여 다시 시도해주세요.");
             let bitmap;
             try {
                 bitmap = await requestTile(blob, signal, retry => onProgress(completed, total, retry), e);
                 checkAbort(signal);
                 if (bitmap.width !== e.width || bitmap.height !== e.height) {
-                    throw new Error("타일 " + (completed + 1) + " 응답 크기 불일치: 전송 " + e.width + "×" + e.height + ", 응답 " + bitmap.width + "×" + bitmap.height + ". 서버가 크기를 변경했으므로 조립을 중단했습니다.");
+                    throw new Error("보정된 이미지 크기가 달라 처리를 중단했습니다. 다시 시도해주세요.");
                 }
                 target.drawImage(bitmap, crop.x, crop.y, c.width, c.height, c.x, c.y, c.width, c.height);
             } finally { bitmap?.close(); }

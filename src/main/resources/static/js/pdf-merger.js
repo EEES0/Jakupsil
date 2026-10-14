@@ -105,7 +105,7 @@ form.addEventListener("submit", async (event) => {
         if (!response.ok) {
             if (response.status === 413) throw new Error("PDF 용량이 너무 큽니다. 파일 수나 용량을 줄여주세요.");
             if (response.status === 400 || response.status === 415) throw new Error("합칠 수 없는 파일입니다. PDF 파일을 확인해주세요.");
-            if (response.status === 404 || response.status === 405) throw new Error("PDF 합치기 API에 연결되지 않았습니다. 서버 배포와 API 매핑을 확인해주세요.");
+            if (response.status === 404 || response.status === 405) throw new Error("합치기에 실패했습니다. 잠시 후 다시 시도해주세요.");
             throw new Error("PDF를 합치지 못했습니다. 손상되었거나 암호가 설정된 PDF인지 확인해주세요.");
         }
         const pdf = await response.blob();
@@ -125,7 +125,7 @@ form.addEventListener("submit", async (event) => {
         }
         status.textContent = "합치기 완료. " + filename + " 다운로드를 시작했습니다.";
     } catch (error) {
-        status.textContent = error instanceof TypeError ? "서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요." : error.message;
+        status.textContent = error instanceof TypeError ? "연결에 실패했습니다. 다시 시도해주세요." : error.message;
     } finally {
         isConverting = false;
         fileInput.disabled = false;
