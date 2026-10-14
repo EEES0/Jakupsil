@@ -1,4 +1,4 @@
-package io.github.EEES0.jakupsil.mockDto;
+package io.github.EEES0.jakupsil.mockRequest;
 
 import io.github.EEES0.jakupsil.dto.createFile.*;
 

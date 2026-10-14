@@ -1,7 +1,7 @@
 package io.github.EEES0.jakupsil.serviceTest;
 
 import io.github.EEES0.jakupsil.dto.createFile.CreateFileRequest;
-import io.github.EEES0.jakupsil.mockDto.MockCreateFileRequest;
+import io.github.EEES0.jakupsil.mockRequest.MockCreateFileRequest;
 import io.github.EEES0.jakupsil.service.CreateDocx;
 import org.apache.poi.xwpf.usermodel.*;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(MockitoExtension.class)
+
 public class CreateDocxTest {
     private final CreateDocx createDocx = new CreateDocx();
     @Test

@@ -14,7 +14,6 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(MockitoExtension.class)
 public class ConvertDocxToPdfTest {
     private final ConvertDocxToPdf convertDocxToPdf = new ConvertDocxToPdf();
     byte[] docxBytes;
