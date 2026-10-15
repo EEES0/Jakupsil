@@ -14,15 +14,33 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Python 및 폰트 설치
+# Python, 폰트, Tesseract OCR 설치
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python3 \
         python3-venv \
         fonts-noto-cjk \
         fonts-nanum \
-        fontconfig && \
+        fontconfig \
+        tesseract-ocr \
+        libtesseract-dev \
+        tesseract-ocr-kor \
+        tesseract-ocr-eng && \
     rm -rf /var/lib/apt/lists/*
+
+# Tesseract 버전 및 설치된 언어 확인
+RUN tesseract --version && \
+    tesseract --list-langs
+
+# 설치된 한글·영어 모델을 고정된 경로에 복사
+RUN mkdir -p /app/tessdata && \
+    cp "$(dpkg -L tesseract-ocr-kor | grep '/kor.traineddata$')" \
+       /app/tessdata/kor.traineddata && \
+    cp "$(dpkg -L tesseract-ocr-eng | grep '/eng.traineddata$')" \
+       /app/tessdata/eng.traineddata
+
+# Java에서 읽을 환경변수
+ENV TESSDATA_PATH=/app/tessdata
 
 # 프로젝트의 한글 TTF를 시스템 폰트로 등록
 COPY src/main/resources/fonts/NanumGothic.ttf \

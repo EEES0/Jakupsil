@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/ping")
 public class PingController {
 
-    @GetMapping("/ping")
+    @GetMapping("")
     public String ping() {
         return "don't sleep";
     }
