@@ -1,53 +1,50 @@
-# [작업실]
-```
-브라우저에서 내용을 작성하고 완성 파일까지 다운로드 할 수 있는 문서 에디터
-```
+# 작업실
 
-렌더 무료 인스턴스 사용해서 요청 없다가 접속하면 서버 깨는데 1분 정도 소요될 수 있습니다
+> 다양한 문서 작업을 처리하는 도구 모음
 
 ## 서비스 주소
 
-- 배포 주소: jakupsil.onrender.com
-- GitHub: github.com/EEES0/Jakupsil
+- 배포 주소: https://jakupsil.onrender.com
+- GitHub: https://github.com/EEES0/Jakupsil
+- Notion: https://app.notion.com/p/3ce5c71ebece809cadefe10042e0ec25?source=copy_link
 
 ## 개발 목적
 
-문서 하나 만드려고 구독할 돈도 아깝고
-이참에 스프링 프로젝트도 할겸 만들었습니다
+문서 몇 개 작업하려고 구독할 돈도 아깝고,
+이참에 스프링 프로젝트도 할 겸 만들었습니다.
 
 ## 주요 기능
 
 ### 구현 완료
 
-- [x] 웹 문서 편집
-- [x] DOCX 파일 생성 및 다운로드
-- [x] 글자 서식 및 문단 정렬
+- [x] 웹 DOCX 문서 편집기
+- [x] DOCX 문서를 PDF로 변환
+- [x] 이미지를 PDF로 변환
+- [x] 이미지 대비 강조 도구
+- [x] PDF 병합
+- [x] 이미지에서 텍스트 추출(베타)
 
 ### 개발 예정
 
 - [ ] 폰트 변경 기능
-- [ ] 작성 내용 저장 및 복원
-- [ ] 문서 템플릿 선택
-- [ ] 사용자별 문서 저장 및 관리
-- [ ] 외부에서 파일 불러오기
-- [ ] PDF 파일 생성 및 다운로드
-- 
+- [ ] 서버에 문서 저장
+- [ ] 회원가입, 로그인
+- [ ] 도구 추가 예정
+
 ## 기술 스택
 
 | 구분 | 기술 |
 |---|---|
-| Backend | Java, Spring Boot |
-| Frontend | HTML, CSS, JavaScript |
-| Editor | Tiptap |
-| DOCX 생성 | Apache POI |
-| HWP 생성 | hwplib |
-| 배포 | Render |
-
-## 동작 과정
-
-1. 사용자가 에디터에서 문서를 작성합니다.
-2. 프론트가 에디터 내용을 JSON으로 서버에 전송합니다.
-3. 서버가 문서 내용과 서식을 해석합니다.
-4. 작성한 형식의 파일을 생성합니다.
-5. 브라우저에서 파일을 다운로드합니다.
-
+| Backend | Java 21, Spring Boot 4.1.1, Spring Web MVC |
+| Frontend | HTML, CSS, JavaScript, Canvas API |
+| Editor | Tiptap 3.31.3 |
+| DOCX 생성 | Apache POI 5.5.1 |
+| DOCX → PDF 변환 | Python, word2pdf 0.1.0 |
+| PDF 생성·병합 | Apache PDFBox 3.0.6 |
+| 이미지 보정 | OpenCV 4.9.0-0 |
+| 이미지 메타데이터 | metadata-extractor 2.21.0 |
+| OCR | Tess4J 5.11.0, Tesseract OCR |
+| Test | JUnit 5, Mockito, Spring Test |
+| Build | Gradle |
+| CI | GitHub Actions |
+| 배포 | Docker, Eclipse Temurin 21, Render |
