@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/editor.css?v=20261011-4">
     <link rel="stylesheet" href="css/converter.css?v=20261014-5">
     <script src="js/editor/workspace.js" defer></script>
-    <script type="module" src="js/image-enhance.js?v=20261014-7"></script>
+    <script type="module" src="js/image-enhance.js?v=20261015-2"></script>
 </head>
 <body class="dark">
 <a class="skip-link" href="#document-workspace">파일 변환으로 이동</a>
@@ -54,21 +54,24 @@
             <p id="selected-file" role="status">선택된 파일이 없습니다.</p>
         </div>
         <div class="conversion-actions">
-            <label for="save-type">출력 형식</label>
-            <select id="save-type" name="saveType">
-                <option value="png" selected>PNG</option>
-                <option value="pdf">PDF</option>
-            </select>
+
             <button id="convert-button" type="submit" disabled aria-describedby="convert-status">대비 강조 시작</button>
             <button id="cancel-enhance" type="button" disabled>취소</button>
-            <button id="download-enhance" type="button" disabled>PNG 다운로드</button>
+
         </div>
     </form>
     <p id="convert-status" role="status" aria-live="polite" aria-atomic="true"></p>
     <progress id="tile-progress" value="0" max="1" aria-label="처리 진행률" hidden></progress>
     <section id="enhance-comparison" hidden aria-label="원본과 결과 비교">
-        <div class="comparison-controls"><label for="compare-zoom">확대</label><select id="compare-zoom"><option value="fit">화면에 맞춤</option><option value="1">100%</option><option value="2">200%</option><option value="4">400%</option></select></div>
         <div class="comparison-grid"><figure><figcaption>원본</figcaption><div class="image-viewport"><img id="original-preview" alt="보정 전 원본 사진"></div></figure><figure><figcaption>보정 결과</figcaption><div class="image-viewport"><canvas id="enhanced-canvas" aria-label="보정된 사진"></canvas></div></figure></div>
+        <div class="conversion-actions">
+            <label for="save-type">출력 형식</label>
+            <select id="save-type" name="saveType">
+                <option value="png" selected>PNG</option>
+                <option value="pdf">PDF</option>
+            </select>
+            <button id="download-enhance" type="button" disabled>PNG 다운로드</button>
+        </div>
     </section>
     <noscript><p>파일 변환을 사용하려면 JavaScript를 활성화해주세요.</p></noscript>
 </main>
